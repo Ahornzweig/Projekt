@@ -1,0 +1,46 @@
+* {box-sizing: border-box;}
+
+body{
+    background-color: white;
+}
+#main{
+    margin: auto;
+    max-width: 800px;
+}
+.images{
+  position: relative;
+    height: 200px;
+    margin: 0 auto 30px;
+    display: flex;
+    justify-content: space-evenly;
+    
+}
+
+.img{
+    position: relative;
+    height: 100%;
+}
+
+img{
+    height: CALC(100% - 20px);
+    padding: 10px;
+}
+
+#range{
+    display: flex;
+    justify-content: center;
+}
+
+.img-hover-zoom {
+    height: 200px;
+    width: 200px;
+    overflow: hidden; /* Removing this will break the effects */
+    border-radius: 100%;
+    border: 5px solid #3d3a3a;
+}
+
+.img-hover-zoom img {
+    position: relative;
+    top:30px;
+    left:40px;
+}
