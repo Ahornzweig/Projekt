@@ -10,6 +10,9 @@ function update(_event) {
     for (let i = 0; i < imgs.length; i++) {
         let img = imgs[i].children[0];
         img.style.transform = "scale(" + input.value + ")";
+        let scale = Number(input.value);
+        img.style.left = "" + (40 * scale) + "px";
+        img.style.top = "" + (30 * scale) + "px";
     }
 }
 window.addEventListener("load", init);
