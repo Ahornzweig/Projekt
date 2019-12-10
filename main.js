@@ -11,8 +11,8 @@ function update(_event) {
         let img = imgs[i].children[0];
         img.style.transform = "scale(" + input.value + ")";
         let scale = Number(input.value);
-        img.style.left = "" + (scale) + "px";
-        img.style.top = "" + (scale * 30) + "px";
+        img.style.left = "" + (scale) + "%";
+        img.style.top = "" + (scale * 20) + "%";
     }
 }
 window.addEventListener("load", init);
