@@ -14,8 +14,8 @@ function update(_event: Event): void {
         img.style.transform = "scale(" + input.value + ")";
         let scale: number = Number(input.value);
 
-        img.style.left = "" + (scale) + "px";
-        img.style.top = "" + (scale *30) + "px";
+        img.style.left = "" + (scale) + "%";
+        img.style.top = "" + (scale *20) + "%";
     }
 }
 window.addEventListener("load", init);
