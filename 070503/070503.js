@@ -3,7 +3,7 @@
 var p; // shortcut to reference prototypes
 var lib={};var ss={};var img={};
 lib.ssMetadata = [
-		{name:"070503_atlas_", frames: [[0,802,270,269],[554,802,280,10],[0,0,832,800],[834,281,10,279],[834,0,10,279],[272,802,280,10]]}
+		{name:"070503_atlas_", frames: [[0,802,270,269],[272,802,280,10],[0,0,832,800],[834,0,10,279],[834,281,10,279],[554,802,280,10]]}
 ];
 
 
@@ -11,42 +11,42 @@ lib.ssMetadata = [
 
 
 
-(lib.CachedTexturedBitmap_17 = function() {
+(lib.CachedTexturedBitmap_24 = function() {
 	this.initialize(ss["070503_atlas_"]);
 	this.gotoAndStop(0);
 }).prototype = p = new cjs.Sprite();
 
 
 
-(lib.CachedTexturedBitmap_18 = function() {
+(lib.CachedTexturedBitmap_25 = function() {
 	this.initialize(ss["070503_atlas_"]);
 	this.gotoAndStop(1);
 }).prototype = p = new cjs.Sprite();
 
 
 
-(lib.CachedTexturedBitmap_19 = function() {
+(lib.CachedTexturedBitmap_26 = function() {
 	this.initialize(ss["070503_atlas_"]);
 	this.gotoAndStop(2);
 }).prototype = p = new cjs.Sprite();
 
 
 
-(lib.CachedTexturedBitmap_20 = function() {
+(lib.CachedTexturedBitmap_27 = function() {
 	this.initialize(ss["070503_atlas_"]);
 	this.gotoAndStop(3);
 }).prototype = p = new cjs.Sprite();
 
 
 
-(lib.CachedTexturedBitmap_21 = function() {
+(lib.CachedTexturedBitmap_28 = function() {
 	this.initialize(ss["070503_atlas_"]);
 	this.gotoAndStop(4);
 }).prototype = p = new cjs.Sprite();
 
 
 
-(lib.CachedTexturedBitmap_23 = function() {
+(lib.CachedTexturedBitmap_30 = function() {
 	this.initialize(ss["070503_atlas_"]);
 	this.gotoAndStop(5);
 }).prototype = p = new cjs.Sprite();
@@ -73,7 +73,7 @@ function getMCSymbolPrototype(symbol, nominalBounds, frameBounds) {
 	this.initialize(mode,startPosition,loop,{});
 
 	// Ebene_1
-	this.instance = new lib.CachedTexturedBitmap_23();
+	this.instance = new lib.CachedTexturedBitmap_30();
 	this.instance.parent = this;
 	this.instance.setTransform(-69.85,-2.5,0.5,0.5);
 
@@ -86,7 +86,7 @@ function getMCSymbolPrototype(symbol, nominalBounds, frameBounds) {
 	this.initialize(mode,startPosition,loop,{});
 
 	// Ebene_1
-	this.instance = new lib.CachedTexturedBitmap_21();
+	this.instance = new lib.CachedTexturedBitmap_28();
 	this.instance.parent = this;
 	this.instance.setTransform(-2.5,-69.85,0.5,0.5);
 
@@ -99,7 +99,7 @@ function getMCSymbolPrototype(symbol, nominalBounds, frameBounds) {
 	this.initialize(mode,startPosition,loop,{});
 
 	// Ebene_1
-	this.instance = new lib.CachedTexturedBitmap_20();
+	this.instance = new lib.CachedTexturedBitmap_27();
 	this.instance.parent = this;
 	this.instance.setTransform(-2.5,-69.85,0.5,0.5);
 
@@ -124,7 +124,7 @@ function getMCSymbolPrototype(symbol, nominalBounds, frameBounds) {
 	this.text_1.parent = this;
 	this.text_1.setTransform(-294.95,-262.45,1.2274,1.2274);
 
-	this.instance = new lib.CachedTexturedBitmap_19();
+	this.instance = new lib.CachedTexturedBitmap_26();
 	this.instance.parent = this;
 	this.instance.setTransform(-231.2,-193.2,0.5,0.5);
 
@@ -154,7 +154,7 @@ p._updateVisibility = _updateVisibility;
 	this.initialize(mode,startPosition,loop,{});
 
 	// Ebene_1
-	this.instance = new lib.CachedTexturedBitmap_18();
+	this.instance = new lib.CachedTexturedBitmap_25();
 	this.instance.parent = this;
 	this.instance.setTransform(-69.85,-2.5,0.5,0.5);
 
@@ -167,7 +167,7 @@ p._updateVisibility = _updateVisibility;
 	this.initialize(mode,startPosition,loop,{});
 
 	// Ebene_1
-	this.instance = new lib.CachedTexturedBitmap_17();
+	this.instance = new lib.CachedTexturedBitmap_24();
 	this.instance.parent = this;
 	this.instance.setTransform(-67.35,-67.35,0.5,0.5);
 
@@ -180,6 +180,11 @@ p._updateVisibility = _updateVisibility;
 	this.initialize(mode,startPosition,loop,{});
 
 	// Ebene_1
+	this.top = new lib.top();
+	this.top.name = "top";
+	this.top.parent = this;
+	this.top.setTransform(0,-67.35);
+
 	this.bottom = new lib.bottom();
 	this.bottom.name = "bottom";
 	this.bottom.parent = this;
@@ -195,16 +200,11 @@ p._updateVisibility = _updateVisibility;
 	this.left.parent = this;
 	this.left.setTransform(-67.35,0);
 
-	this.top = new lib.top();
-	this.top.name = "top";
-	this.top.parent = this;
-	this.top.setTransform(0,-67.35);
-
 	this.blue = new lib.blue();
 	this.blue.name = "blue";
 	this.blue.parent = this;
 
-	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.blue},{t:this.top},{t:this.left},{t:this.right},{t:this.bottom}]}).wait(1));
+	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.blue},{t:this.left},{t:this.right},{t:this.bottom},{t:this.top}]}).wait(1));
 
 }).prototype = getMCSymbolPrototype(lib.square, new cjs.Rectangle(-69.8,-69.8,140,139.7), null);
 
@@ -219,8 +219,7 @@ p._updateVisibility = _updateVisibility;
 		
 		
 		let square=this.square;
-		
-		
+		console.log(square);
 		let body = document.querySelector('body');
 		let wrapper = document.createElement("div");
 		wrapper.className = "controls-wrapper";
@@ -282,36 +281,147 @@ p._updateVisibility = _updateVisibility;
 		let text2 = document.createElement("p");
 		text2.innerText="Durchführung";
 		
-		let inputEx = div = document.createElement("input");
-		inputEx.className = "execution";
-		inputEx.value=1;
-		inputEx.min=1;
-		inputEx.max=10;
-		inputEx.step=0.5;
+		let inputExScale = div = document.createElement("input");
+		inputExScale.className = "execution";
+		inputExScale.value=1;
+		inputExScale.min=1;
+		inputExScale.max=1.5;
+		inputExScale.step=0.01;
+		inputExScale.type = "range";
 		
-		inputEx.type = "range";
+		let inputExScher = div = document.createElement("input");
+		inputExScher.className = "execution";
+		inputExScher.value=1;
+		inputExScher.min=1;
+		inputExScher.max=10;
+		inputExScher.step=0.5;
+		inputExScher.type = "range";
+		
+		let inputExRot = div = document.createElement("input");
+		inputExRot.className = "execution";
+		inputExRot.value=0;
+		inputExRot.min=0;
+		inputExRot.max=360;
+		inputExRot.step=1;
+		inputExRot.type = "range";
+		
 		exContainer.appendChild(text2);
-		exContainer.appendChild(inputEx);
+		exContainer.appendChild(inputExScale);
+		exContainer.appendChild(inputExScher);
+		exContainer.appendChild(inputExRot);
 		exContainer.style.cssText = "display: flex; flex-direction: column; width: 200px";
 		
-		
-		inputEx.addEventListener("input",changeEx);
+		inputExScale.addEventListener("input",changeScale);
+		inputExScher.addEventListener("input",changeScher);
+		inputExRot.addEventListener("input",changeRot);
 		
 		shapeContainer.addEventListener("input",test);
 		
+		let orderScale=0;
+		let orderScher=0;
+		let orderRot=0;
 		
 		let newGreen;
 		let newRed;
 		let newBlue;
 		
-		function changeEx() {
-		    console.log("ex");
+		let bounds=square.left.getBounds()
+		let boundsTop=square.top.getBounds()
+		
+		function changeScale() {
+			
+			let curentHeight=bounds.height*inputExScale.value;
+			
+			square.left.scaleY=inputExScale.value;
+			square.left.y=-bounds.y-curentHeight/2;
+			
+			square.right.scaleY=inputExScale.value;
+			square.right.y=-bounds.y-curentHeight/2;
+			
+			square.blue.scaleY=inputExScale.value;
+			square.blue.y=-bounds.y-curentHeight/2;
+		
+			square.top.y=-bounds.y+boundsTop.height/4-curentHeight;
+		}
+		
+		function changeScher() {
+			
+			let curentHeight=inputExScher.value;
+			
+			console.log(square.tilt);
 		
 		}
 		
-		function test() {
-		console.log(inputScher.checked,"test");
+		function changeRot() {
+			let deg=inputExRot.value;
+			
+			square.rotation=deg;
+		}
 		
+		function test(e) {
+		
+		    let type = e.path[0].getAttribute("name");
+		
+		    switch (type) {
+		
+		        case "scale":
+		            if (!inputScale.checked) {
+		                if (orderScher > orderScale) {
+		                    orderScher--;
+		                }
+		                if (orderRot > orderScale) {
+		                    orderRot--;
+		                }
+		                orderScale = 0;
+		            } else {
+		                for (let i = 1; i < 4; i++) {
+		                    if (orderRot != i && orderScher != i) {
+		                        orderScale = i;
+								break;
+		                    }
+		                }
+		            }
+		            break;
+		
+		        case "scherung":
+		            if (!inputScher.checked) {
+		                if (orderScale > orderScher) {
+		                    orderScale--;
+		                }
+		                if (orderRot > orderScher) {
+		                    orderRot--;
+		                }
+		                orderScher = 0;
+		            } else {
+		                for (let i = 1; i < 4; i++) {
+		                    if (orderRot != i && orderScale != i) {
+		                        orderScher = i;
+								break;
+		                    }
+		                }
+		            }
+		            break;
+		
+		        case "rot":
+		            if (!inputRot.checked) {
+		                if (orderScale > orderRot) {
+		                    orderScale--;
+		                }
+		                if (orderScher > orderRot) {
+		                    orderScher--;
+		                }
+		                orderRot = 0;
+		            } else {
+		                for (let i = 1; i < 4; i++) {
+		                    if (orderScher != i && orderScale != i) {
+		                        orderRot = i;
+								break;
+		                    }
+		                }
+		            }
+		            break;
+		    }
+		    console.log(orderScale, orderScher, orderRot);
 		}
 	}
 
@@ -321,17 +431,17 @@ p._updateVisibility = _updateVisibility;
 	// JS
 	this.instance = new lib.an_CSS({'id': '', 'href':'assets/main.css'});
 
-	this.instance.setTransform(85,663.95,1,1,0,0,0,50,11);
+	this.instance.setTransform(68.05,603.9,1,1,0,0,0,50,11);
 
 	this.timeline.addTween(cjs.Tween.get(this.instance).wait(1));
 
 	// Viereck
-	this.squae = new lib.square();
-	this.squae.name = "squae";
-	this.squae.parent = this;
-	this.squae.setTransform(271,417);
+	this.square = new lib.square();
+	this.square.name = "square";
+	this.square.parent = this;
+	this.square.setTransform(271,417);
 
-	this.timeline.addTween(cjs.Tween.get(this.squae).wait(1));
+	this.timeline.addTween(cjs.Tween.get(this.square).wait(1));
 
 	// koordnatensysthem
 	this.koordinates = new lib.koordinatensythem();
@@ -342,7 +452,7 @@ p._updateVisibility = _updateVisibility;
 	this.timeline.addTween(cjs.Tween.get(this.koordinates).wait(1));
 
 }).prototype = p = new cjs.MovieClip();
-p.nominalBounds = new cjs.Rectangle(384.5,435.1,263,240.39999999999998);
+p.nominalBounds = new cjs.Rectangle(367.6,435.1,279.9,180.29999999999995);
 // library properties:
 lib.properties = {
 	id: 'DD1164FAC07BD749A432009464DB96BA',
