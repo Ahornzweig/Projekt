@@ -1,7 +1,7 @@
 namespace CO070_ {
     let show: HTMLImageElement;
     function init(): void {
-        show = <HTMLImageElement>document.getElementById("00");
+        show = <HTMLImageElement>document.getElementById("10");
         show.style.cssText = "display:block;"
         let input: HTMLDivElement = <HTMLDivElement>document.getElementsByClassName("slider-container")[0];
 

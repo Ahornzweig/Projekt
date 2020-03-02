@@ -3,7 +3,7 @@ var CO070_;
 (function (CO070_) {
     let show;
     function init() {
-        show = document.getElementById("00");
+        show = document.getElementById("10");
         show.style.cssText = "display:block;";
         let input = document.getElementsByClassName("slider-container")[0];
         input.addEventListener("input", update);
