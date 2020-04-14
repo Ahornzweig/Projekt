@@ -73,8 +73,8 @@ function movePoint(_e) {
     let y = _e.pageY - container.offsetTop;
     let target = _e.target;
 
-    if (x > (0+target.offsetWidth/2) && x < (container.offsetWidth - target.offsetWidth/2) && y > (0+target.offsetHeight/2) && y < (container.offsetHeight - target.offsetHeight/2)) {
-
+    if (x > (0 + target.offsetWidth / 2) && x < (container.offsetWidth - target.offsetWidth / 2) && y > (0 + target.offsetHeight / 2) && y < (container.offsetHeight - target.offsetHeight / 2)) {
+        console.log("true");
         target.style.cssText = "top:" + y + "px;left:" + x + "px";
 
         switch (target.id) {
@@ -88,7 +88,6 @@ function movePoint(_e) {
                 lines[target.id] = [x / zoom, y / zoom];
                 break;
         }
-
         draw();
     }
 }
