@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="Main.js"></script>
+</head>
+
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    #container {
+        width: 500px;
+        height: 400px;
+        position: absolute;
+        left: 50%;
+        top: 10px;
+        transform: translateX(-50%);
+    }
+
+    canvas {
+        image-rendering: auto;
+        border: 3px solid black;
+        border-radius: 20px;
+    }
+
+    .points {
+        width: 30px;
+        height: 30px;
+        border-radius: 100%;
+        background-color: deepskyblue;
+        position: absolute;
+        transform: translate(-50%, -50%);
+    }
+
+    #pointOne {
+        top: 100px;
+        left: 100px;
+    }
+
+    #pointTwo {
+        top: 300px;
+        left: 400px;
+    }
+
+    #pointThree {
+        top: 300px;
+        left: 100px;
+    }
+
+    #options {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    #options button {
+        width: 50px;
+    }
+
+    .active {
+        background-color: #42b983;
+    }
+</style>
+
+<body>
+    
+
+    <div id="container">
+        <svg width="0" height="0" style="position:absolute;z-index:-1;">
+            <defs>
+                <filter id="remove-alpha" x="0" y="0" width="100%" height="100%">
+                    <feComponentTransfer>
+                        <feFuncA type="discrete" tableValues="0 1"></feFuncA>
+                    </feComponentTransfer>
+                </filter>
+            </defs>
+        </svg>
+        <canvas width="50px" height="40px" class="canvas"></canvas>
+        <div id="options">
+            <h2>Antialiasing</h2>
+            <button id="on" class="active">An</button>
+            <button id="off" class="">Aus</button>
+        </div>
+    </div>
+</body>
+
+</html>
