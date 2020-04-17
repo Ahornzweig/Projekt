@@ -5,7 +5,7 @@ let container;
 let target;
 let lines = [];
 let image;
-let zoom = 2;
+let zoom = 10;
 function main() {
     canvas = document.getElementsByTagName("canvas")[0];
     ctx = canvas.getContext("2d");
@@ -38,6 +38,7 @@ function main() {
     pointThree.setAttribute("class", "points");
     container.appendChild(pointThree);
     lines["pointThree"] = [100 / zoom, 300 / zoom];
+    ctx.filter = "none";
     draw();
     let on = document.getElementById("on");
     let off = document.getElementById("off");
@@ -45,18 +46,21 @@ function main() {
         canvas.style.imageRendering = "pixelated";
         this.className = "active";
         on.className = "";
+        ctx.filter = "url(#remove-alpha)";
+        draw();
     });
     on.addEventListener("click", function () {
         canvas.style.imageRendering = "auto";
         this.className = "active";
         off.className = "";
+        ctx.filter = "none";
+        draw();
     });
 }
 function movePoint(_e) {
     let x = _e.pageX - container.offsetLeft + (container.offsetWidth / 2);
     let y = _e.pageY - container.offsetTop;
     if (x > (0 + target.offsetWidth / 2) && x < (container.offsetWidth - target.offsetWidth / 2) && y > (0 + target.offsetHeight / 2) && y < (container.offsetHeight - target.offsetHeight / 2)) {
-        console.log("true");
         target.style.cssText = "top:" + y + "px;left:" + x + "px";
         switch (target.id) {
             case "pointOne":

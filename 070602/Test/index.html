@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -13,7 +14,7 @@
         padding: 0;
     }
 
-    body{
+    body {
         -webkit-touch-callout: none;
         -webkit-user-select: none;
         -khtml-user-select: none;
@@ -61,29 +62,41 @@
         left: 100px;
     }
 
-    #options{
+    #options {
         position: absolute;
         left: 50%;
         transform: translateX(-50%);
     }
-    #options button{
+
+    #options button {
         width: 50px;
     }
 
-    .active{
+    .active {
         background-color: #42b983;
     }
-
 </style>
 
 <body>
-<div id="container">
-    <canvas width="250px" height="200px" class="canvas"></canvas>
-    <div id="options">
-        <h2>Antialiasing</h2>
-        <button id="on" class="active">An</button>
-        <button id="off" class="">Aus</button>
+    
+
+    <div id="container">
+        <svg width="0" height="0" style="position:absolute;z-index:-1;">
+            <defs>
+                <filter id="remove-alpha" x="0" y="0" width="100%" height="100%">
+                    <feComponentTransfer>
+                        <feFuncA type="discrete" tableValues="0 1"></feFuncA>
+                    </feComponentTransfer>
+                </filter>
+            </defs>
+        </svg>
+        <canvas width="50px" height="40px" class="canvas"></canvas>
+        <div id="options">
+            <h2>Antialiasing</h2>
+            <button id="on" class="active">An</button>
+            <button id="off" class="">Aus</button>
+        </div>
     </div>
-</div>
 </body>
+
 </html>

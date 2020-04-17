@@ -4,7 +4,7 @@ let container: HTMLDivElement;
 let target: HTMLDivElement;
 let lines: any = [];
 let image: ImageData;
-let zoom: number = 2;
+let zoom: number = 10;
 
 function main(): void {
     canvas = document.getElementsByTagName("canvas")[0];
@@ -14,6 +14,7 @@ function main(): void {
     canvas.style.height = "400px";
     ctx.lineWidth = 1;
     ctx.lineJoin = "round";
+    
 
     container = <HTMLDivElement>document.getElementById("container");
 
@@ -50,22 +51,29 @@ function main(): void {
     pointThree.setAttribute("class", "points");
     container.appendChild(pointThree);
     lines["pointThree"] = [100 / zoom, 300 / zoom];
+    
+    ctx.filter = "none";
     draw();
 
     let on: HTMLButtonElement = <HTMLButtonElement>document.getElementById("on");
     let off: HTMLButtonElement = <HTMLButtonElement>document.getElementById("off");
 
-    off.addEventListener("click", function () {
+    off.addEventListener("click", function (): void {
         canvas.style.imageRendering = "pixelated";
         this.className = "active";
-        on.className = ""
+        on.className = "";
+        ctx.filter = "url(#remove-alpha)";
+        draw();
+
     });
 
-    on.addEventListener("click", function () {
+    on.addEventListener("click", function (): void {
         canvas.style.imageRendering = "auto";
         this.className = "active";
-        off.className = ""
-    })
+        off.className = "";
+        ctx.filter = "none";
+        draw();
+    });
 }
 
 function movePoint(_e: MouseEvent): void {
@@ -73,7 +81,7 @@ function movePoint(_e: MouseEvent): void {
     let y: number = _e.pageY - container.offsetTop;
 
     if (x > (0 + target.offsetWidth / 2) && x < (container.offsetWidth - target.offsetWidth / 2) && y > (0 + target.offsetHeight / 2) && y < (container.offsetHeight - target.offsetHeight / 2)) {
-        console.log("true");
+
         target.style.cssText = "top:" + y + "px;left:" + x + "px";
 
         switch (target.id) {
