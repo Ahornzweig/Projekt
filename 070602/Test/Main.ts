@@ -68,7 +68,6 @@ function main(): void {
     });
 
     on.addEventListener("click", function (): void {
-        canvas.style.imageRendering = "auto";
         this.className = "active";
         off.className = "";
         ctx.filter = "none";

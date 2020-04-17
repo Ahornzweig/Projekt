@@ -50,7 +50,6 @@ function main() {
         draw();
     });
     on.addEventListener("click", function () {
-        canvas.style.imageRendering = "auto";
         this.className = "active";
         off.className = "";
         ctx.filter = "none";
