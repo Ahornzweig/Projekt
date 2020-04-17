@@ -52,6 +52,8 @@ function main(): void {
     container.appendChild(pointThree);
     lines["pointThree"] = [100 / zoom, 300 / zoom];
     
+    
+    canvas.style.imageRendering = "pixelated";
     ctx.filter = "none";
     draw();
 
@@ -68,6 +70,7 @@ function main(): void {
     });
 
     on.addEventListener("click", function (): void {
+        canvas.style.imageRendering = "pixelated";
         this.className = "active";
         off.className = "";
         ctx.filter = "none";

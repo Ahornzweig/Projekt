@@ -38,6 +38,7 @@ function main() {
     pointThree.setAttribute("class", "points");
     container.appendChild(pointThree);
     lines["pointThree"] = [100 / zoom, 300 / zoom];
+    canvas.style.imageRendering = "pixelated";
     ctx.filter = "none";
     draw();
     let on = document.getElementById("on");
@@ -50,6 +51,7 @@ function main() {
         draw();
     });
     on.addEventListener("click", function () {
+        canvas.style.imageRendering = "pixelated";
         this.className = "active";
         off.className = "";
         ctx.filter = "none";
