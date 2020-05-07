@@ -1,0 +1,53 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+#container{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70%;
+    height: 500px; 
+}
+
+#img-wrapper{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    
+}
+
+#controls{
+    position: absolute;
+    bottom: 0;
+    transform: translateY(110%);
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+ 
+}
+
+#translate{
+    order: 0;
+}
+
+#skew{
+    order: 1;
+}
+
+#rotation{
+    order: 2;
+}
+
+
+img{
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    width: 15%;
+    transform: translate(-50%, 50%);
+    /*transform: skew(10deg) translateX(10px);*/
+}
+
