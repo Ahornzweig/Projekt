@@ -1,9 +1,18 @@
 namespace Transformations {
-    let transX: number = -50;
-    let posX: number = -50;
 
-    let transY: number = 50;
-    let posY: number = 50;
+    interface Order {
+        [key: string]: number;
+    }
+
+    interface Position {
+        [key: number]: string;
+    }
+
+    let transX: number = 0;
+    let posX: number = 0;
+
+    let transY: number = 0;
+    let posY: number = 0;
 
     let skX: number = 0;
     let skewedX: number = 0;
@@ -14,9 +23,8 @@ namespace Transformations {
     let totation: number = 0;
     let rotated: number = 0;
 
-    let first: string = "translate";
-    let second: string = "skew";
-    let third: string = "rotate";
+    let positions: Position = { 0: "translate", 1: "skew", 2: "rotation" };
+    let order: Order = { "translate": 0, "skew": 1, "rotation": 2 };
 
     let img: HTMLImageElement;
 
@@ -39,13 +47,81 @@ namespace Transformations {
         let rotation: HTMLInputElement = <HTMLInputElement>document.getElementById("rotate");
         rotation.addEventListener("input", rotate);
 
+        let leftArrows: HTMLCollectionOf<HTMLAnchorElement> = <HTMLCollectionOf<HTMLAnchorElement>>document.getElementsByClassName("left");
+        for (let i: number = 0; i < leftArrows.length; i++) {
+            leftArrows[i].addEventListener("click", moveLeft);
+        }
 
+
+        let rightArrows: HTMLCollectionOf<HTMLAnchorElement> = <HTMLCollectionOf<HTMLAnchorElement>>document.getElementsByClassName("right");
+        for (let i: number = 0; i < rightArrows.length; i++) {
+            rightArrows[i].addEventListener("click", moveRight);
+        }
     }
+
+    //change order of transformation and the order the HTML elements are displayed
+    function moveLeft(_event: MouseEvent): void {
+
+        let target: HTMLAnchorElement = <HTMLAnchorElement>_event.target;
+        let parent: HTMLDivElement = <HTMLDivElement>target.parentNode;
+        let category: string = parent.getAttribute("id");
+
+        let position: number = order[category];
+        let newPosition: number = order[category] - 1;
+
+        if (newPosition >= 0) {
+            parent.style.order = "" + newPosition;
+
+            let move: string = positions[newPosition];
+            order[category] = newPosition;
+            order[move] = position;
+
+            positions[newPosition] = category;
+            positions[position] = move;
+
+            let moveParent: HTMLDivElement = <HTMLDivElement>document.getElementById(move);
+            moveParent.style.order = "" + position;
+
+            let transform: string = getTransformation();
+            img.style.transform = transform;
+        }
+    }
+
+    function moveRight(_event: MouseEvent): void {
+        let target: HTMLAnchorElement = <HTMLAnchorElement>_event.target;
+        let parent: HTMLDivElement = <HTMLDivElement>target.parentNode;
+        let category: string = parent.getAttribute("id");
+
+        let position: number = order[category];
+        let newPosition: number = order[category] + 1;
+
+        if (newPosition <= 2) {
+            parent.style.order = "" + newPosition;
+
+            let move: string = positions[newPosition];
+            order[category] = newPosition;
+            order[move] = position;
+
+            positions[newPosition] = category;
+            positions[position] = move;
+
+            let moveParent: HTMLDivElement = <HTMLDivElement>document.getElementById(move);
+            moveParent.style.order = "" + position;
+
+            let transform: string = getTransformation();
+            img.style.transform = transform;
+        }
+    }
+
+    //get order of transformation
     function getTransformation(): string {
 
+        //write new variabel for transform(css)
+        //"The transform functions are multiplied in order from left to right, meaning that composite transforms are effectively applied in order from right to left."
+        //so you need to add the transform value - that is suposed to be used first - as the last value and the value - that is used as the last one - first.
         let result: string = "";
 
-        switch (first) {
+        switch (positions[2]) {
             case "translate":
                 result += "translate(" + posX + "%," + posY + "%)";
                 break;
@@ -54,13 +130,12 @@ namespace Transformations {
                 result += "skew(" + skewedX + "deg," + skewedY + "deg)";
                 break;
 
-            case "rotate":
+            case "rotation":
                 result += "rotate(" + rotated + "deg)";
                 break;
         }
 
-
-        switch (second) {
+        switch (positions[1]) {
             case "translate":
                 result += "translate(" + posX + "%," + posY + "%)";
                 break;
@@ -69,13 +144,12 @@ namespace Transformations {
                 result += "skew(" + skewedX + "deg," + skewedY + "deg)";
                 break;
 
-            case "rotate":
+            case "rotation":
                 result += "rotate(" + rotated + "deg)";
                 break;
         }
 
-
-        switch (third) {
+        switch (positions[0]) {
             case "translate":
                 result += "translate(" + posX + "%," + posY + "%)";
                 break;
@@ -84,7 +158,7 @@ namespace Transformations {
                 result += "skew(" + skewedX + "deg," + skewedY + "deg)";
                 break;
 
-            case "rotate":
+            case "rotation":
                 result += "rotate(" + rotated + "deg)";
                 break;
         }
@@ -92,6 +166,7 @@ namespace Transformations {
         return result;
     }
 
+    //update transform values
     function translateX(_e: Event): void {
 
         let x: number = Number((_e.target as HTMLInputElement).value);
@@ -126,7 +201,7 @@ namespace Transformations {
 
 
     function rotate(_e: Event): void {
-        console.log("test");
+
         let rot: number = Number((_e.target as HTMLInputElement).value);
         rotated = totation + rot;
         let transform: string = getTransformation();

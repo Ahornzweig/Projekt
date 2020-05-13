@@ -1,19 +1,18 @@
 "use strict";
 var Transformations;
 (function (Transformations) {
-    let transX = -50;
-    let posX = -50;
-    let transY = 50;
-    let posY = 50;
+    let transX = 0;
+    let posX = 0;
+    let transY = 0;
+    let posY = 0;
     let skX = 0;
     let skewedX = 0;
     let skY = 0;
     let skewedY = 0;
     let totation = 0;
     let rotated = 0;
-    let first = "translate";
-    let second = "skew";
-    let third = "rotate";
+    let positions = { 0: "translate", 1: "skew", 2: "rotation" };
+    let order = { "translate": 0, "skew": 1, "rotation": 2 };
     let img;
     function main() {
         img = document.querySelector("img");
@@ -27,44 +26,96 @@ var Transformations;
         skewInpY.addEventListener("input", skewY);
         let rotation = document.getElementById("rotate");
         rotation.addEventListener("input", rotate);
+        let leftArrows = document.getElementsByClassName("left");
+        for (let i = 0; i < leftArrows.length; i++) {
+            leftArrows[i].addEventListener("click", moveLeft);
+        }
+        let rightArrows = document.getElementsByClassName("right");
+        for (let i = 0; i < rightArrows.length; i++) {
+            rightArrows[i].addEventListener("click", moveRight);
+        }
     }
+    //change order of transformation and the order the HTML elements are displayed
+    function moveLeft(_event) {
+        let target = _event.target;
+        let parent = target.parentNode;
+        let category = parent.getAttribute("id");
+        let position = order[category];
+        let newPosition = order[category] - 1;
+        if (newPosition >= 0) {
+            parent.style.order = "" + newPosition;
+            let move = positions[newPosition];
+            order[category] = newPosition;
+            order[move] = position;
+            positions[newPosition] = category;
+            positions[position] = move;
+            let moveParent = document.getElementById(move);
+            moveParent.style.order = "" + position;
+            let transform = getTransformation();
+            img.style.transform = transform;
+        }
+    }
+    function moveRight(_event) {
+        let target = _event.target;
+        let parent = target.parentNode;
+        let category = parent.getAttribute("id");
+        let position = order[category];
+        let newPosition = order[category] + 1;
+        if (newPosition <= 2) {
+            parent.style.order = "" + newPosition;
+            let move = positions[newPosition];
+            order[category] = newPosition;
+            order[move] = position;
+            positions[newPosition] = category;
+            positions[position] = move;
+            let moveParent = document.getElementById(move);
+            moveParent.style.order = "" + position;
+            let transform = getTransformation();
+            img.style.transform = transform;
+        }
+    }
+    //get order of transformation
     function getTransformation() {
+        //write new variabel for transform(css)
+        //"The transform functions are multiplied in order from left to right, meaning that composite transforms are effectively applied in order from right to left."
+        //so you need to add the transform value - that is suposed to be used first - as the last value and the value - that is used as the last one - first.
         let result = "";
-        switch (first) {
+        switch (positions[2]) {
             case "translate":
                 result += "translate(" + posX + "%," + posY + "%)";
                 break;
             case "skew":
                 result += "skew(" + skewedX + "deg," + skewedY + "deg)";
                 break;
-            case "rotate":
+            case "rotation":
                 result += "rotate(" + rotated + "deg)";
                 break;
         }
-        switch (second) {
+        switch (positions[1]) {
             case "translate":
                 result += "translate(" + posX + "%," + posY + "%)";
                 break;
             case "skew":
                 result += "skew(" + skewedX + "deg," + skewedY + "deg)";
                 break;
-            case "rotate":
+            case "rotation":
                 result += "rotate(" + rotated + "deg)";
                 break;
         }
-        switch (third) {
+        switch (positions[0]) {
             case "translate":
                 result += "translate(" + posX + "%," + posY + "%)";
                 break;
             case "skew":
                 result += "skew(" + skewedX + "deg," + skewedY + "deg)";
                 break;
-            case "rotate":
+            case "rotation":
                 result += "rotate(" + rotated + "deg)";
                 break;
         }
         return result;
     }
+    //update transform values
     function translateX(_e) {
         let x = Number(_e.target.value);
         posX = transX + x;
@@ -90,7 +141,6 @@ var Transformations;
         img.style.transform = transform;
     }
     function rotate(_e) {
-        console.log("test");
         let rot = Number(_e.target.value);
         rotated = totation + rot;
         let transform = getTransformation();
