@@ -117,11 +117,9 @@ namespace Transformations {
     function getTransformation(): string {
 
         //write new variabel for transform(css)
-        //"The transform functions are multiplied in order from left to right, meaning that composite transforms are effectively applied in order from right to left."
-        //so you need to add the transform value - that is suposed to be used first - as the last value and the value - that is used as the last one - first.
         let result: string = "";
 
-        switch (positions[2]) {
+        switch (positions[0]) {
             case "translate":
                 result += "translate(" + posX + "%," + posY + "%)";
                 break;
@@ -149,7 +147,7 @@ namespace Transformations {
                 break;
         }
 
-        switch (positions[0]) {
+        switch (positions[2]) {
             case "translate":
                 result += "translate(" + posX + "%," + posY + "%)";
                 break;
@@ -162,6 +160,8 @@ namespace Transformations {
                 result += "rotate(" + rotated + "deg)";
                 break;
         }
+
+        result += "rotate(" + rotated + "deg)";
 
         return result;
     }
