@@ -20,6 +20,9 @@ img{
     font-weight: bold;
     font-size: 40px;
     cursor: pointer;
+    width: 15px;
+    height: 35px;
+    display: inline-block;
 }
 
 .right:hover, .left:hover{
@@ -44,7 +47,7 @@ img{
 #controls{
     position: absolute;
     bottom: 0;
-    transform: translateY(110%);
+    transform: translateY(105%);
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
@@ -95,6 +98,25 @@ input {
     border-radius: 50%;
     background: #00A8FF;
     cursor: pointer;
+  }
+
+  @media screen and (max-width: 600px) {
+    img{
+        bottom: CALC(50% - 25px);
+        left:CALC(50% - 25px);
+        width: 50px;
+    }
+    
+    
+    #container{
+        width: 90%;
+        height: 200px; 
+    }
+
+    .right, .left{
+       transform: rotate(90deg);
+       margin: 0 10px;
+    }
   }
 
 
