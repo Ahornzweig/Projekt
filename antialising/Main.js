@@ -40,6 +40,15 @@ var Antialising;
         pointThree.setAttribute("class", "points");
         container.appendChild(pointThree);
         lines["pointThree"] = [100 / zoom, 300 / zoom];
+        if (window.innerWidth < 600) {
+            console.log("test");
+            canvas.style.width = "250px";
+            canvas.style.height = "200px";
+            zoom = 5;
+            lines["pointOne"] = [50 / zoom, 50 / zoom];
+            lines["pointTwo"] = [200 / zoom, 150 / zoom];
+            lines["pointThree"] = [50 / zoom, 150 / zoom];
+        }
         canvas.style.imageRendering = "pixelated";
         ctx.filter = "none";
         draw();
