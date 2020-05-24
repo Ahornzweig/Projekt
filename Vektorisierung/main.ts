@@ -11,7 +11,7 @@ namespace CO070_ {
     function update(_event: Event): void {
         let input: any = document.getElementsByClassName("slider");
         let id: string = "" + (input[0].value) + (input[1].value) + "";
-        console.log(id);
+        
         let showNew: HTMLImageElement = <HTMLImageElement>document.getElementById(id);
         showNew.style.cssText = "display:block;"
         show.style.cssText = "display:hide;"

@@ -11,7 +11,6 @@ var CO070_;
     function update(_event) {
         let input = document.getElementsByClassName("slider");
         let id = "" + (input[0].value) + (input[1].value) + "";
-        console.log(id);
         let showNew = document.getElementById(id);
         showNew.style.cssText = "display:block;";
         show.style.cssText = "display:hide;";
