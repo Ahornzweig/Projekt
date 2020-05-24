@@ -10,7 +10,7 @@ body{
 }
 .images{
   position: relative;
-  height: 200px;
+  width: 300px;
   margin: 0 auto 30px;
   display: flex;
   justify-content: space-evenly;
@@ -19,12 +19,12 @@ body{
 
 .img{
   position: relative;
-  height: 100%;
+  width: 100%;
   display: none;
 }
 
 img{
-  height: CALC(100% - 20px);
+  width: CALC(100% - 20px);
   padding: 10px;
 }
 
@@ -48,7 +48,7 @@ img{
   width: 25px;
   height: 25px;
   border-radius: 50%; 
-  background: #4CAF50;
+  background: #00A8FF;
   cursor: pointer;
 }
 
@@ -56,6 +56,18 @@ img{
   width: 25px;
   height: 25px;
   border-radius: 50%;
-  background: #4CAF50;
+  background: #00A8FF;
   cursor: pointer;
+}
+
+@media screen and (min-width: 600px) {
+  .images{
+      width: 500px;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+  .images{
+      width: 800px;
+    }
 }
