@@ -21,11 +21,13 @@ var BoneAnimation;
         show.children[0].style.opacity = "0";
         video.style.display = "block";
         video.play();
+        input.disabled = true;
     }
     function videoEnded() {
         console.log("test");
         show.children[0].style.opacity = "1";
         video.style.display = "none";
+        input.disabled = false;
     }
     function update(_event) {
         let id = "" + (input.value);

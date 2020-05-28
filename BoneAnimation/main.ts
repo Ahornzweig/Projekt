@@ -26,12 +26,14 @@ namespace BoneAnimation {
         (<HTMLImageElement>show.children[0]).style.opacity = "0";
         video.style.display = "block";
         video.play();
+        input.disabled=true;
     }
 
     function videoEnded(): void {
         console.log("test");
         (<HTMLImageElement>show.children[0]).style.opacity = "1";
         video.style.display = "none";
+        input.disabled=false;
     }
 
     function update(_event: Event): void {
