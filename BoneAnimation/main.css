@@ -8,20 +8,50 @@
   position: relative;
   width: 300px;
   margin: 0 auto 30px;
-  display: flex;
-  justify-content: center;
 }
 
 .img{
-  position: relative;
   width: 100%;
   display: none;
 }
 
 img{
-  width: CALC(100% - 20px);
-  padding: 10px;
+  width: 100%;
 }
+
+video{
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: none;
+}
+
+button{
+  margin: 20px auto 0;
+  display: block;
+}
+
+.button {
+	background-color:#00A8FF;
+	border-radius:28px;
+	border:1px solid #00A8FF;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:17px;
+	padding:16px 31px;
+	text-decoration:none;
+}
+.button:hover {
+	background-color:rgb(20, 163, 235);
+}
+.button:active {
+	position:relative;
+  top:1px;
+}
+
+.button:focus {outline:0;}
 
 .slider {
   -webkit-appearance: none;

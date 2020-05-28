@@ -74,8 +74,6 @@ var Transformations;
             img.style.transform = transform;
         }
     }
-    //test LUL
-    //test2
     //get order of transformation
     function getTransformation() {
         //write new variabel for transform(css)
