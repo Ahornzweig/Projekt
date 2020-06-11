@@ -22,9 +22,8 @@ namespace BoneAnimation {
 
             videos[i].addEventListener('ended', videoEnded, false);
         }
-
     }
-
+ 
     function play(): void {
         video = <HTMLVideoElement>document.getElementById("video-" + playVideo);
         (<HTMLImageElement>show.children[0]).style.opacity = "0";
