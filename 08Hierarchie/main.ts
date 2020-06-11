@@ -1,14 +1,18 @@
 namespace BoneAnimation {
     let show: HTMLImageElement;
-    let input: HTMLInputElement;
+    let input: NodeListOf<HTMLInputElement>;
     let video: HTMLVideoElement;
+    let playVideo: string = "1";
 
     function init(): void {
         show = <HTMLImageElement>document.getElementById("1");
         show.style.cssText = "display:block;"
-        input = <HTMLInputElement>document.querySelector("input");
+        input = <NodeListOf<HTMLInputElement>>document.querySelectorAll("input");
+        for (let i: number = 0; i < input.length; i++) {
 
-        input.addEventListener("input", update);
+            input[i].addEventListener("input", update);
+        }
+
 
         let button: HTMLButtonElement = document.querySelector("button");
         button.addEventListener("click", play);
@@ -22,11 +26,15 @@ namespace BoneAnimation {
     }
 
     function play(): void {
-        video = <HTMLVideoElement>document.getElementById("video-" + (input.value));
+        video = <HTMLVideoElement>document.getElementById("video-" + playVideo);
         (<HTMLImageElement>show.children[0]).style.opacity = "0";
+        
         video.style.display = "block";
         video.play();
-        input.disabled=true;
+        for (let i: number = 0; i < input.length; i++) {
+
+            input[i].disabled = true;
+        }
     }
 
     function videoEnded(): void {
@@ -34,14 +42,17 @@ namespace BoneAnimation {
         (<HTMLImageElement>show.children[0]).style.opacity = "1";
         video.currentTime = 0;
         video.style.display = "none";
-        input.disabled=false;
+        for (let i: number = 0; i < input.length; i++) {
+
+            input[i].disabled = false;
+        }
     }
 
     function update(_event: Event): void {
 
-        let id: string = "" + (input.value);
+        playVideo = (<HTMLInputElement>_event.target).value;
 
-        let showNew: HTMLImageElement = <HTMLImageElement>document.getElementById(id);
+        let showNew: HTMLImageElement = <HTMLImageElement>document.getElementById(playVideo);
         showNew.style.cssText = "display:block;"
         show.style.cssText = "display:hide;"
         show = showNew;
