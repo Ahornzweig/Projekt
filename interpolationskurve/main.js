@@ -1,5 +1,5 @@
 var canvas = document.getElementById('curve'),
-    ctx = canvas.getContext('2d'),
+    crc2 = canvas.getContext('2d'),
     box = document.getElementById('box'),
     supportsTouch = ('createTouch' in document),
     timeVal = 700;
@@ -32,8 +32,8 @@ BezierHandle.prototype = {
     draw: function () {
         // figure out the edges
         this.getSides();
-        ctx.fillStyle = "#222";
-        ctx.fillRect(this.left, this.top, this.width, this.height);
+        crc2.fillStyle = "#222";
+        crc2.fillRect(this.left, this.top, this.width, this.height);
     }
 
 };
@@ -54,13 +54,13 @@ Graph.prototype = {
 
     draw: function () {
 
-        ctx.fillStyle = "#fff";
-        ctx.fillRect(this.x, this.y, this.width, this.height);
+        crc2.fillStyle = "#fff";
+        crc2.fillRect(this.x, this.y, this.width, this.height);
 
         // the 0.5 offset is to account for stroke width to make lines sharp
-        ctx.strokeStyle = '#666';
-        ctx.lineWidth = 1;
-        ctx.strokeRect(this.x + 0.5, this.y - 0.5, this.width - 1, this.height);
+        crc2.strokeStyle = '#666';
+        crc2.lineWidth = 1;
+        crc2.strokeRect(this.x + 0.5, this.y - 0.5, this.width - 1, this.height);
 
     }
 
@@ -131,23 +131,23 @@ function onPress(event) {
             curBottom += 20;
         }
 
-        //console.log('current.x:',current.x, 'current.y:',current.y)
         if (x >= curLeft &&
             x <= curRight &&
             y >= curTop &&
             y <= curBottom
         ) {
-            //over the current handle
-            //console.log('over')
+
             //drag = true;
             draggingObj = current;
             oldX = event.pageX;
             oldY = event.pageY;
 
-            var currentlySelected = $('#options option:checked');
 
-            currentlySelected.removeAttr('checked')
-                .parent().parent().find('input').last().attr('checked', 'checked');
+            let selected = document.querySelector('input[type="radio"]:checked');
+            console.log(selected);
+            selected.checked = false;
+            let custom = document.querySelectorAll('#options input[type="radio"]');
+            custom[custom.length - 1].checked = true;
 
 
             document.addEventListener('mouseup', onRelease, false);
@@ -220,30 +220,30 @@ canvas.addEventListener('touchstart', function touchPress(event) {
 
 function updateDrawing() {
 
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    crc2.clearRect(0, 0, canvas.width, canvas.height);
     // draw graph
     graph.draw();
     // get handles
     var cp1 = handles[0],
         cp2 = handles[1];
     // draw bezier curve
-    ctx.save();
-    ctx.strokeStyle = '#4C84D3';
-    ctx.lineWidth = 3;
-    ctx.beginPath();
-    ctx.moveTo(graph.x, graph.y + graph.height);
+    crc2.save();
+    crc2.strokeStyle = '#4C84D3';
+    crc2.lineWidth = 3;
+    crc2.beginPath();
+    crc2.moveTo(graph.x, graph.y + graph.height);
     //start at bottom left, first handle is cp1, second handle is cp2, end is top right
-    ctx.bezierCurveTo(cp1.x, cp1.y, cp2.x, cp2.y, graph.width, graph.y);
-    ctx.stroke();
-    ctx.restore();
+    crc2.bezierCurveTo(cp1.x, cp1.y, cp2.x, cp2.y, graph.width, graph.y);
+    crc2.stroke();
+    crc2.restore();
     // draw anchor point lines
-    ctx.strokeStyle = '#f00';
-    ctx.beginPath();
-    ctx.moveTo(graph.x, graph.y + graph.height);
-    ctx.lineTo(cp1.x, cp1.y);
-    ctx.moveTo(graph.width, graph.y);
-    ctx.lineTo(cp2.x, cp2.y);
-    ctx.stroke();
+    crc2.strokeStyle = '#f00';
+    crc2.beginPath();
+    crc2.moveTo(graph.x, graph.y + graph.height);
+    crc2.lineTo(cp1.x, cp1.y);
+    crc2.moveTo(graph.width, graph.y);
+    crc2.lineTo(cp2.x, cp2.y);
+    crc2.stroke();
     // draw handles
 
     for (var i = 0; i < handles.length; i++) {
@@ -285,9 +285,9 @@ function setTransitions() {
 }
 
 function presetChange() {
-    
-    let selected = document.querySelector('input[type="radio"]:checked')
-   
+
+    let selected = document.querySelector('input[type="radio"]:checked');
+
     var coordinates = selected.value.split(','),
         cp1 = handles[0],
         cp2 = handles[1];
