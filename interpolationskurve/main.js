@@ -1,7 +1,6 @@
 var canvas = document.getElementById('curve'),
     ctx = canvas.getContext('2d'),
     box = document.getElementById('box'),
-    code = document.getElementById('codeOutput'),
     supportsTouch = ('createTouch' in document),
     timeVal = 700;
 
@@ -39,10 +38,8 @@ BezierHandle.prototype = {
 
 };
 
-
-// make 2 new handles
 var handles = [
-    new BezierHandle(50, 280),
+    new BezierHandle(50, 180),
     new BezierHandle(150, 180)
 ];
 
@@ -57,8 +54,6 @@ Graph.prototype = {
 
     draw: function () {
 
-        ctx.save();
-
         ctx.fillStyle = "#fff";
         ctx.fillRect(this.x, this.y, this.width, this.height);
 
@@ -67,7 +62,6 @@ Graph.prototype = {
         ctx.lineWidth = 1;
         ctx.strokeRect(this.x + 0.5, this.y - 0.5, this.width - 1, this.height);
 
-        ctx.restore();
     }
 
 };
@@ -150,10 +144,10 @@ function onPress(event) {
             oldX = event.pageX;
             oldY = event.pageY;
 
-            var currentlySelected = $('#presets option:selected');
+            var currentlySelected = $('#options option:checked');
 
-            currentlySelected.removeAttr('selected')
-                .parent().parent().find('option').last().attr('selected', 'selected');
+            currentlySelected.removeAttr('checked')
+                .parent().parent().find('input').last().attr('checked', 'checked');
 
 
             document.addEventListener('mouseup', onRelease, false);
@@ -225,7 +219,7 @@ canvas.addEventListener('touchstart', function touchPress(event) {
 }, false);
 
 function updateDrawing() {
-    
+
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     // draw graph
     graph.draw();
@@ -251,61 +245,10 @@ function updateDrawing() {
     ctx.lineTo(cp2.x, cp2.y);
     ctx.stroke();
     // draw handles
+
     for (var i = 0; i < handles.length; i++) {
         handles[i].draw();
     }
-    // output code
-    var x1 = (cp1.x / graph.width).toFixed(3),
-        y1 = ((graph.height + graph.y - cp1.y) / graph.height).toFixed(3),
-        x2 = (cp2.x / canvas.width).toFixed(3),
-        y2 = ((graph.height + graph.y - cp2.y) / graph.height).toFixed(3),
-        //console.log( cp1.x, cp1.y )
-        points = '(' + x1 + ', ' + y1 + ', ' + x2 + ', ' + y2 + ')',
-        bezier = 'cubic-bezier' + points,
-
-        easeName = $('#presets option:selected').text();
-
-    if (easeName.indexOf('custom') > -1) {
-        easeName = 'custom';
-    }
-
-
-    var webkitTrans = '-webkit-transition: all ' + timeVal + 'ms ' + bezier;
-    var webkitTiming = '-webkit-transition-timing-function: ' + bezier;
-
-    if (y1 > 1 ||
-        y1 < 0 ||
-        y2 > 1 ||
-        y2 < 0) {
-
-        var webkitY1 = y1,
-            webkitY2 = y2;
-
-        if (y1 > 1) webkitY1 = 1;
-        if (y1 < 0) webkitY1 = 0;
-        if (y2 > 1) webkitY2 = 1;
-        if (y2 < 0) webkitY2 = 0;
-
-        webkitTrans = '-webkit-transition: all ' + timeVal + 'ms ' + 'cubic-bezier(' + x1 + ', ' + webkitY1 + ', ' + x2 + ', ' + webkitY2 + ')' + '; /* older webkit */' +
-            '<br>-webkit-transition: all ' + timeVal + 'ms ' + bezier;
-        webkitTiming = '-webkit-transition-timing-function: cubic-bezier(' + x1 + ', ' + webkitY1 + ', ' + x2 + ', ' + webkitY2 + ')' + '; /* older webkit */' +
-            '<br>-webkit-transition-timing-function: ' + bezier;
-
-    }
-    // output code snippets
-    code.innerHTML =
-        '<p>' +
-        webkitTrans +
-        '; <br>&nbsp;&nbsp; -moz-transition: all ' + timeVal + 'ms ' + bezier +
-        '; <br>&nbsp;&nbsp;&nbsp;&nbsp; -o-transition: all ' + timeVal + 'ms ' + bezier +
-        '; <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; transition: all ' + timeVal + 'ms ' + bezier +
-        '; /* ' + easeName + ' */</p>' +
-        '<p>' +
-        webkitTiming +
-        '; <br>&nbsp;&nbsp; -moz-transition-timing-function: ' + bezier +
-        '; <br>&nbsp;&nbsp;&nbsp;&nbsp; -o-transition-timing-function: ' + bezier +
-        '; <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; transition-timing-function: ' + bezier +
-        '; /* ' + easeName + ' */</p>';
 }
 
 function setTransitions() {
@@ -342,8 +285,10 @@ function setTransitions() {
 }
 
 function presetChange() {
-
-    var coordinates = this.value.split(','),
+    
+    let selected = document.querySelector('input[type="radio"]:checked')
+   
+    var coordinates = selected.value.split(','),
         cp1 = handles[0],
         cp2 = handles[1];
 
@@ -355,19 +300,17 @@ function presetChange() {
     updateDrawing();
 }
 
-var $presets = $('#presets'),
-  
-    $presetOpts = $('#presets option');
+var options = document.getElementById("options");
 
-$presets.change(presetChange);
+options.addEventListener("input", presetChange);
 
 // get the button value and toggle the class
 $('.testButton').click(function () {
     //updateDrawing();
     setTransitions();
-    
+
     let box = document.querySelector("#box");
-    
+
     box.className = "" + this.getAttribute("id");
     /*console.log(box.className);
     if (box.className == "") {
@@ -379,5 +322,5 @@ $('.testButton').click(function () {
 });
 
 setTransitions();
-$presets.trigger('change');
 
+presetChange()

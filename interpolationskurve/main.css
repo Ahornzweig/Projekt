@@ -8,12 +8,20 @@ margin: 0;
 
  #container {
   max-width: 1200px;
-  /* margin: 0 auto; */
   position: relative;
   display: flex;
   flex-direction: column;
  }
  
+#options{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+label{
+  padding: 10px;
+}
+
 .controls {
   border-bottom: 1px solid #fff;
 }
