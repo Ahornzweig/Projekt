@@ -35,7 +35,6 @@ BezierHandle.prototype = {
         crc2.fillStyle = "#222";
         crc2.fillRect(this.left, this.top, this.width, this.height);
     }
-
 };
 
 var handles = [
@@ -104,7 +103,6 @@ var drag = false,
 
 function onPress(event) {
 
-    // to get rid of text cursor
     event.preventDefault();
     event.stopPropagation(); //not sure if this is needed
 
@@ -137,7 +135,6 @@ function onPress(event) {
             y <= curBottom
         ) {
 
-            //drag = true;
             draggingObj = current;
             oldX = event.pageX;
             oldY = event.pageY;
@@ -158,7 +155,6 @@ function onPress(event) {
 
         }
     }
-
 }
 
 function onMove(event) {
@@ -185,7 +181,6 @@ function onMove(event) {
     draggingObj.y = y;
 
     updateDrawing();
-
 }
 
 function touchMove(event) {
@@ -194,12 +189,7 @@ function touchMove(event) {
 }
 
 function onRelease(event) {
-    //console.log('release')
     drag = false;
-    // restore pointer cursor
-    canvas.style.cursor = 'pointer';
-    document.body.style.cursor = 'default';
-
     document.removeEventListener('mousemove', onMove, false);
     document.removeEventListener('touchmove', touchMove, false);
     document.removeEventListener('mouseup', onRelease, false);
@@ -210,7 +200,6 @@ function touchEnd(event) {
     onRelease(event);
     event.preventDefault();
 }
-
 
 canvas.addEventListener('mousedown', onPress, false);
 canvas.addEventListener('touchstart', function touchPress(event) {
@@ -244,7 +233,6 @@ function updateDrawing() {
     crc2.moveTo(graph.width, graph.y);
     crc2.lineTo(cp2.x, cp2.y);
     crc2.stroke();
-    // draw handles
 
     for (var i = 0; i < handles.length; i++) {
         handles[i].draw();
@@ -263,7 +251,7 @@ function setTransitions() {
 
         points = '(' + x1 + ', ' + y1 + ', ' + x2 + ', ' + y2 + ')';
 
-    // set all transition types. ugly ugly vendor prefixes
+    
     box.style.WebkitTransition =
         box.style.MozTransition =
         box.style.MsTransition =
@@ -301,24 +289,22 @@ function presetChange() {
 }
 
 var options = document.getElementById("options");
-
 options.addEventListener("input", presetChange);
 
-// get the button value and toggle the class
+let set = true;
 $('.testButton').click(function () {
-    //updateDrawing();
+
     setTransitions();
 
     let box = document.querySelector("#box");
 
-    box.className = "" + this.getAttribute("id");
-    /*console.log(box.className);
-    if (box.className == "") {
-    } else {
-        box.className = "";
-    }*/
-    console.log(this.getAttribute("id"));
-    //$('#box').toggleClass($(this).val());
+    if (set) {
+        box.classList.add(this.getAttribute("id"));
+        set = false;
+    } else if (!set) {
+        box.classList.remove(this.getAttribute("id"));
+        set = true;
+    }
 });
 
 setTransitions();
