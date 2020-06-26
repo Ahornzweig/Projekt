@@ -8,12 +8,20 @@ margin: 0;
 
  #container {
   max-width: 1200px;
-  /* margin: 0 auto; */
   position: relative;
   display: flex;
   flex-direction: column;
  }
  
+#options{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+label{
+  padding: 10px;
+}
+
 .controls {
   border-bottom: 1px solid #fff;
 }
@@ -61,7 +69,7 @@ figcaption {
    align-self: center;
 }
 
-.anim{
+.tween-container{
   margin-bottom: 30px;
 }
  
@@ -79,7 +87,6 @@ figcaption {
   height: 100px;
   background: url('assets/square.jpg') no-repeat ;/*center center*/
   position: relative;
-  margin-top: 3px;
   left: 0px;
   opacity: 1;
   -webkit-border-radius: 6px;
@@ -92,20 +99,8 @@ figcaption {
   transform: translateZ(0);
  }
 
- #box.left {
+ #box.tween {
    left: calc(100% - 100px);
- }
-
- #box.opacity {
-   opacity: 0;
- }
-
- #box.width {
-   width: 100%;
- }
-
- #box.height {
-   height: 560px;
  }
 
  @media screen and (max-device-width: 480px) {

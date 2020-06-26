@@ -6,8 +6,8 @@
     <title>Page Title</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
-
 </head>
+
 <body>
     <div id="container">
         <div class="graph">
@@ -18,36 +18,22 @@
             </figure>
         </div>
 
-        
         <div class="options">
-
-            <div class="anim">
+            <div class="tween-container">
                 <div id="box" class="" style="background-image: url(assets/square.jpg);"></div>
             </div>
-    
-        
-            <label for="presets"><span class="text">Easing:</span>
-                <select name="presets" id="presets">
-                        <option value="0.420, 0.000, 1.000, 1.000" selected>ease-in</option>
-                        <option value="0.000, 0.000, 0.580, 1.000">ease-out</option>
-                        <option value="0.420, 0.000, 0.580, 1.000">ease-in-out</option>
-                        <option value="0.500, 0.250, 0.500, 0.750">custom (drag the handles)</option>
-                </select>
-            </label>
-            <!-- <label><input type="radio" name="easeing" value="0.420, 0.000, 1.000, 1.000" selected>ease-in</label>
-              <label><input type="radio" name="easeing" value="0.000, 0.000, 0.580, 1.000" >ease-out</label>
-              <label><input type="radio" name="easeing" value="0.420, 0.000, 0.580, 1.000" >ease-in-out</label>
-              <label><input type="radio" name="easeing" value="0.500, 0.250, 0.500, 0.750" >custom (drag the handles)</label>-->
+
+            <div id="options">
+                <label><input type="radio" name="tweening" value="0.420, 0.000, 1.000, 1.000" checked>ease-in</label>
+                <label><input type="radio" name="tweening" value="0.000, 0.000, 0.580, 1.000">ease-out</label>
+                <label><input type="radio" name="tweening" value="0.420, 0.000, 0.580, 1.000">ease-in-out</label>
+                <label><input type="radio" name="tweening" value="0.500, 0.250, 0.500, 0.750">custom</label>
+            </div>
 
             <label>
-                <input type="button" name="left" value="Start" id="left" class="testButton">
+                <input type="button" name="tween" value="Start" id="tween" class="testButton">
             </label>
         </div>
-
-        <!--<div id="snippets">
-            <h3>Code snippets, short and long-hand:</h3>
-            <code id="codeOutput"></code>
-          </div>-->
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
         <script src="main.js"></script>

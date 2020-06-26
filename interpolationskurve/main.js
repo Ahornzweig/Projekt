@@ -1,7 +1,6 @@
 var canvas = document.getElementById('curve'),
-    ctx = canvas.getContext('2d'),
+    crc2 = canvas.getContext('2d'),
     box = document.getElementById('box'),
-    code = document.getElementById('codeOutput'),
     supportsTouch = ('createTouch' in document),
     timeVal = 700;
 
@@ -33,16 +32,13 @@ BezierHandle.prototype = {
     draw: function () {
         // figure out the edges
         this.getSides();
-        ctx.fillStyle = "#222";
-        ctx.fillRect(this.left, this.top, this.width, this.height);
+        crc2.fillStyle = "#222";
+        crc2.fillRect(this.left, this.top, this.width, this.height);
     }
-
 };
 
-
-// make 2 new handles
 var handles = [
-    new BezierHandle(50, 280),
+    new BezierHandle(50, 180),
     new BezierHandle(150, 180)
 ];
 
@@ -57,17 +53,14 @@ Graph.prototype = {
 
     draw: function () {
 
-        ctx.save();
-
-        ctx.fillStyle = "#fff";
-        ctx.fillRect(this.x, this.y, this.width, this.height);
+        crc2.fillStyle = "#fff";
+        crc2.fillRect(this.x, this.y, this.width, this.height);
 
         // the 0.5 offset is to account for stroke width to make lines sharp
-        ctx.strokeStyle = '#666';
-        ctx.lineWidth = 1;
-        ctx.strokeRect(this.x + 0.5, this.y - 0.5, this.width - 1, this.height);
+        crc2.strokeStyle = '#666';
+        crc2.lineWidth = 1;
+        crc2.strokeRect(this.x + 0.5, this.y - 0.5, this.width - 1, this.height);
 
-        ctx.restore();
     }
 
 };
@@ -110,7 +103,6 @@ var drag = false,
 
 function onPress(event) {
 
-    // to get rid of text cursor
     event.preventDefault();
     event.stopPropagation(); //not sure if this is needed
 
@@ -137,23 +129,22 @@ function onPress(event) {
             curBottom += 20;
         }
 
-        //console.log('current.x:',current.x, 'current.y:',current.y)
         if (x >= curLeft &&
             x <= curRight &&
             y >= curTop &&
             y <= curBottom
         ) {
-            //over the current handle
-            //console.log('over')
-            //drag = true;
+
             draggingObj = current;
             oldX = event.pageX;
             oldY = event.pageY;
 
-            var currentlySelected = $('#presets option:selected');
 
-            currentlySelected.removeAttr('selected')
-                .parent().parent().find('option').last().attr('selected', 'selected');
+            let selected = document.querySelector('input[type="radio"]:checked');
+            console.log(selected);
+            selected.checked = false;
+            let custom = document.querySelectorAll('#options input[type="radio"]');
+            custom[custom.length - 1].checked = true;
 
 
             document.addEventListener('mouseup', onRelease, false);
@@ -164,7 +155,6 @@ function onPress(event) {
 
         }
     }
-
 }
 
 function onMove(event) {
@@ -191,7 +181,6 @@ function onMove(event) {
     draggingObj.y = y;
 
     updateDrawing();
-
 }
 
 function touchMove(event) {
@@ -200,12 +189,7 @@ function touchMove(event) {
 }
 
 function onRelease(event) {
-    //console.log('release')
     drag = false;
-    // restore pointer cursor
-    canvas.style.cursor = 'pointer';
-    document.body.style.cursor = 'default';
-
     document.removeEventListener('mousemove', onMove, false);
     document.removeEventListener('touchmove', touchMove, false);
     document.removeEventListener('mouseup', onRelease, false);
@@ -217,7 +201,6 @@ function touchEnd(event) {
     event.preventDefault();
 }
 
-
 canvas.addEventListener('mousedown', onPress, false);
 canvas.addEventListener('touchstart', function touchPress(event) {
     onPress(event);
@@ -225,87 +208,35 @@ canvas.addEventListener('touchstart', function touchPress(event) {
 }, false);
 
 function updateDrawing() {
-    
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    crc2.clearRect(0, 0, canvas.width, canvas.height);
     // draw graph
     graph.draw();
     // get handles
     var cp1 = handles[0],
         cp2 = handles[1];
     // draw bezier curve
-    ctx.save();
-    ctx.strokeStyle = '#4C84D3';
-    ctx.lineWidth = 3;
-    ctx.beginPath();
-    ctx.moveTo(graph.x, graph.y + graph.height);
+    crc2.save();
+    crc2.strokeStyle = '#4C84D3';
+    crc2.lineWidth = 3;
+    crc2.beginPath();
+    crc2.moveTo(graph.x, graph.y + graph.height);
     //start at bottom left, first handle is cp1, second handle is cp2, end is top right
-    ctx.bezierCurveTo(cp1.x, cp1.y, cp2.x, cp2.y, graph.width, graph.y);
-    ctx.stroke();
-    ctx.restore();
+    crc2.bezierCurveTo(cp1.x, cp1.y, cp2.x, cp2.y, graph.width, graph.y);
+    crc2.stroke();
+    crc2.restore();
     // draw anchor point lines
-    ctx.strokeStyle = '#f00';
-    ctx.beginPath();
-    ctx.moveTo(graph.x, graph.y + graph.height);
-    ctx.lineTo(cp1.x, cp1.y);
-    ctx.moveTo(graph.width, graph.y);
-    ctx.lineTo(cp2.x, cp2.y);
-    ctx.stroke();
-    // draw handles
+    crc2.strokeStyle = '#f00';
+    crc2.beginPath();
+    crc2.moveTo(graph.x, graph.y + graph.height);
+    crc2.lineTo(cp1.x, cp1.y);
+    crc2.moveTo(graph.width, graph.y);
+    crc2.lineTo(cp2.x, cp2.y);
+    crc2.stroke();
+
     for (var i = 0; i < handles.length; i++) {
         handles[i].draw();
     }
-    // output code
-    var x1 = (cp1.x / graph.width).toFixed(3),
-        y1 = ((graph.height + graph.y - cp1.y) / graph.height).toFixed(3),
-        x2 = (cp2.x / canvas.width).toFixed(3),
-        y2 = ((graph.height + graph.y - cp2.y) / graph.height).toFixed(3),
-        //console.log( cp1.x, cp1.y )
-        points = '(' + x1 + ', ' + y1 + ', ' + x2 + ', ' + y2 + ')',
-        bezier = 'cubic-bezier' + points,
-
-        easeName = $('#presets option:selected').text();
-
-    if (easeName.indexOf('custom') > -1) {
-        easeName = 'custom';
-    }
-
-
-    var webkitTrans = '-webkit-transition: all ' + timeVal + 'ms ' + bezier;
-    var webkitTiming = '-webkit-transition-timing-function: ' + bezier;
-
-    if (y1 > 1 ||
-        y1 < 0 ||
-        y2 > 1 ||
-        y2 < 0) {
-
-        var webkitY1 = y1,
-            webkitY2 = y2;
-
-        if (y1 > 1) webkitY1 = 1;
-        if (y1 < 0) webkitY1 = 0;
-        if (y2 > 1) webkitY2 = 1;
-        if (y2 < 0) webkitY2 = 0;
-
-        webkitTrans = '-webkit-transition: all ' + timeVal + 'ms ' + 'cubic-bezier(' + x1 + ', ' + webkitY1 + ', ' + x2 + ', ' + webkitY2 + ')' + '; /* older webkit */' +
-            '<br>-webkit-transition: all ' + timeVal + 'ms ' + bezier;
-        webkitTiming = '-webkit-transition-timing-function: cubic-bezier(' + x1 + ', ' + webkitY1 + ', ' + x2 + ', ' + webkitY2 + ')' + '; /* older webkit */' +
-            '<br>-webkit-transition-timing-function: ' + bezier;
-
-    }
-    // output code snippets
-    code.innerHTML =
-        '<p>' +
-        webkitTrans +
-        '; <br>&nbsp;&nbsp; -moz-transition: all ' + timeVal + 'ms ' + bezier +
-        '; <br>&nbsp;&nbsp;&nbsp;&nbsp; -o-transition: all ' + timeVal + 'ms ' + bezier +
-        '; <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; transition: all ' + timeVal + 'ms ' + bezier +
-        '; /* ' + easeName + ' */</p>' +
-        '<p>' +
-        webkitTiming +
-        '; <br>&nbsp;&nbsp; -moz-transition-timing-function: ' + bezier +
-        '; <br>&nbsp;&nbsp;&nbsp;&nbsp; -o-transition-timing-function: ' + bezier +
-        '; <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; transition-timing-function: ' + bezier +
-        '; /* ' + easeName + ' */</p>';
 }
 
 function setTransitions() {
@@ -320,7 +251,7 @@ function setTransitions() {
 
         points = '(' + x1 + ', ' + y1 + ', ' + x2 + ', ' + y2 + ')';
 
-    // set all transition types. ugly ugly vendor prefixes
+    
     box.style.WebkitTransition =
         box.style.MozTransition =
         box.style.MsTransition =
@@ -343,7 +274,9 @@ function setTransitions() {
 
 function presetChange() {
 
-    var coordinates = this.value.split(','),
+    let selected = document.querySelector('input[type="radio"]:checked');
+
+    var coordinates = selected.value.split(','),
         cp1 = handles[0],
         cp2 = handles[1];
 
@@ -355,29 +288,25 @@ function presetChange() {
     updateDrawing();
 }
 
-var $presets = $('#presets'),
-  
-    $presetOpts = $('#presets option');
+var options = document.getElementById("options");
+options.addEventListener("input", presetChange);
 
-$presets.change(presetChange);
-
-// get the button value and toggle the class
+let set = true;
 $('.testButton').click(function () {
-    //updateDrawing();
+
     setTransitions();
-    
+
     let box = document.querySelector("#box");
-    
-    box.className = "" + this.getAttribute("id");
-    /*console.log(box.className);
-    if (box.className == "") {
-    } else {
-        box.className = "";
-    }*/
-    console.log(this.getAttribute("id"));
-    //$('#box').toggleClass($(this).val());
+
+    if (set) {
+        box.classList.add(this.getAttribute("id"));
+        set = false;
+    } else if (!set) {
+        box.classList.remove(this.getAttribute("id"));
+        set = true;
+    }
 });
 
 setTransitions();
-$presets.trigger('change');
 
+presetChange()
