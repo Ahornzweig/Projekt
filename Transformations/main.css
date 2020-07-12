@@ -117,6 +117,14 @@ input {
        transform: rotate(90deg);
        margin: 0 10px;
     }
+
+    h3 {
+        padding-top: 10px;
+    }
+
+    input {
+        margin: 5px auto 0;
+    }
   }
 
 
