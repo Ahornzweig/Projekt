@@ -90,7 +90,7 @@ namespace aufbauVektoren {
         ctx.lineTo(250, 175);
         ctx.lineTo(150, 175);
         ctx.closePath();
-        if (lineWidth != 0) {
+        if (1squareSelected && lineWidth != 0) {
             ctx.stroke();
         }
         ctx.fill();
@@ -110,7 +110,7 @@ namespace aufbauVektoren {
         ctx.lineTo(200, 250);
         ctx.lineTo(100, 250);
         ctx.closePath();
-        if (lineWidth != 0) {
+        if (squareSelected && lineWidth != 0) {
             ctx.stroke();
         }
         ctx.fill();
