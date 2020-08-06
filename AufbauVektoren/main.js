@@ -37,7 +37,6 @@ var aufbauVektoren;
     function update(_e) {
         let target = _e.target.getAttribute("id");
         let value = Number(_e.target.value);
-        console.log(target);
         switch (target) {
             case "red":
                 r = value;
@@ -62,7 +61,6 @@ var aufbauVektoren;
                 prevLineWidth = lineWidth;
                 break;
         }
-        console.log(squareSelected);
         draw();
     }
     function draw() {

@@ -44,7 +44,6 @@ namespace aufbauVektoren {
 
         let target: string = (<HTMLInputElement>_e.target).getAttribute("id");
         let value: number = Number((<HTMLInputElement>_e.target).value);
-        console.log(target);
 
         switch (target) {
             case "red":
@@ -71,16 +70,12 @@ namespace aufbauVektoren {
                 break;
         }
 
-        console.log(squareSelected);
         draw();
     }
 
 
     function draw(): void {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-
-
 
         if (squareSelected) {
             ctx.fillStyle = prevFillingStyle;
