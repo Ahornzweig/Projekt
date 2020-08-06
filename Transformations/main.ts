@@ -30,7 +30,7 @@ namespace Transformations {
 
     function main(): void {
 
-        img = document.querySelector("img");
+        img = document.querySelectorAll("img")[1];
 
         let inputX: HTMLInputElement = <HTMLInputElement>document.getElementById("translateX");
         inputX.addEventListener("input", translateX);

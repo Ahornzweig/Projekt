@@ -15,7 +15,7 @@ var Transformations;
     let order = { "translate": 0, "skew": 1, "rotation": 2 };
     let img;
     function main() {
-        img = document.querySelector("img");
+        img = document.querySelectorAll("img")[1];
         let inputX = document.getElementById("translateX");
         inputX.addEventListener("input", translateX);
         let inputY = document.getElementById("translateY");
