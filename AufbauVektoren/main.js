@@ -7,12 +7,16 @@ var aufbauVektoren;
     let r = 0;
     let g = 0;
     let b = 0;
+    let squareSelected = true;
+    let prevFillingStyle;
+    let prevLineWidth = 5;
     function main() {
         canvas = document.getElementsByTagName("canvas")[0];
         ctx = canvas.getContext("2d");
         ctx.lineWidth = lineWidth;
         ctx.strokeStyle = "black";
         ctx.fillStyle = "rgb(" + r + "," + g + "," + b + ")";
+        prevFillingStyle = "rgb(" + r + "," + g + "," + b + ")";
         ctx.beginPath();
         ctx.moveTo(200, 100);
         ctx.lineTo(250, 175);
@@ -47,13 +51,30 @@ var aufbauVektoren;
             case "line":
                 lineWidth = value;
                 break;
+            case "triangle":
+                squareSelected = false;
+                prevFillingStyle = "rgb(" + r + "," + g + "," + b + ")";
+                prevLineWidth = lineWidth;
+                break;
+            case "square":
+                squareSelected = true;
+                prevFillingStyle = "rgb(" + r + "," + g + "," + b + ")";
+                prevLineWidth = lineWidth;
+                break;
         }
+        console.log(squareSelected);
         draw();
     }
     function draw() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.lineWidth = lineWidth;
-        ctx.fillStyle = "rgb(" + r + "," + g + "," + b + ")";
+        if (squareSelected) {
+            ctx.fillStyle = prevFillingStyle;
+            ctx.lineWidth = prevLineWidth;
+        }
+        else {
+            ctx.fillStyle = "rgb(" + r + "," + g + "," + b + ")";
+            ctx.lineWidth = lineWidth;
+        }
         ctx.beginPath();
         ctx.moveTo(200, 100);
         ctx.lineTo(250, 175);
@@ -63,6 +84,14 @@ var aufbauVektoren;
             ctx.stroke();
         }
         ctx.fill();
+        if (!squareSelected) {
+            ctx.fillStyle = prevFillingStyle;
+            ctx.lineWidth = prevLineWidth;
+        }
+        else {
+            ctx.fillStyle = "rgb(" + r + "," + g + "," + b + ")";
+            ctx.lineWidth = lineWidth;
+        }
         ctx.beginPath();
         ctx.moveTo(100, 150);
         ctx.lineTo(200, 150);

@@ -2,10 +2,13 @@ namespace aufbauVektoren {
     let canvas: HTMLCanvasElement;
     let ctx: CanvasRenderingContext2D;
 
-    let lineWidth = 5;
+    let lineWidth: number = 5;
     let r: number = 0;
     let g: number = 0;
     let b: number = 0;
+    let squareSelected: boolean = true;
+    let prevFillingStyle: string;
+    let prevLineWidth: number = 5;
 
     function main(): void {
         canvas = document.getElementsByTagName("canvas")[0];
@@ -14,6 +17,7 @@ namespace aufbauVektoren {
         ctx.lineWidth = lineWidth;
         ctx.strokeStyle = "black";
         ctx.fillStyle = "rgb(" + r + "," + g + "," + b + ")";
+        prevFillingStyle = "rgb(" + r + "," + g + "," + b + ")";
 
         ctx.beginPath();
         ctx.moveTo(200, 100);
@@ -55,17 +59,36 @@ namespace aufbauVektoren {
             case "line":
                 lineWidth = value;
                 break;
-
+            case "triangle":
+                squareSelected = false;
+                prevFillingStyle = "rgb(" + r + "," + g + "," + b + ")";
+                prevLineWidth = lineWidth;
+                break;
+            case "square":
+                squareSelected = true;
+                prevFillingStyle = "rgb(" + r + "," + g + "," + b + ")";
+                prevLineWidth = lineWidth;
+                break;
         }
 
+        console.log(squareSelected);
         draw();
     }
+
 
     function draw(): void {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        ctx.lineWidth = lineWidth;
-        ctx.fillStyle = "rgb(" + r + "," + g + "," + b + ")";
+
+
+
+        if (squareSelected) {
+            ctx.fillStyle = prevFillingStyle;
+            ctx.lineWidth = prevLineWidth;
+        } else {
+            ctx.fillStyle = "rgb(" + r + "," + g + "," + b + ")";
+            ctx.lineWidth = lineWidth;
+        }
 
         ctx.beginPath();
         ctx.moveTo(200, 100);
@@ -76,6 +99,15 @@ namespace aufbauVektoren {
             ctx.stroke();
         }
         ctx.fill();
+
+
+        if (!squareSelected) {
+            ctx.fillStyle = prevFillingStyle;
+            ctx.lineWidth = prevLineWidth;
+        } else {
+            ctx.fillStyle = "rgb(" + r + "," + g + "," + b + ")";
+            ctx.lineWidth = lineWidth;
+        }
 
         ctx.beginPath();
         ctx.moveTo(100, 150);
