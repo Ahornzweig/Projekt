@@ -78,9 +78,10 @@ var aufbauVektoren;
         ctx.lineTo(250, 175);
         ctx.lineTo(150, 175);
         ctx.closePath();
-        if (1)
-            squareSelected && lineWidth != 0;
-        {
+        if (!squareSelected && lineWidth != 0) {
+            ctx.stroke();
+        }
+        else if (squareSelected && prevLineWidth != 0) {
             ctx.stroke();
         }
         ctx.fill();
@@ -99,6 +100,9 @@ var aufbauVektoren;
         ctx.lineTo(100, 250);
         ctx.closePath();
         if (squareSelected && lineWidth != 0) {
+            ctx.stroke();
+        }
+        else if (!squareSelected && prevLineWidth != 0) {
             ctx.stroke();
         }
         ctx.fill();
