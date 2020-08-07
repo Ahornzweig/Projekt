@@ -26,6 +26,8 @@ var Transformations;
         skewInpY.addEventListener("input", skewY);
         let rotation = document.getElementById("rotate");
         rotation.addEventListener("input", rotate);
+        let reset = document.getElementById("reset");
+        reset.addEventListener("click", clear);
         let leftArrows = document.getElementsByClassName("left");
         for (let i = 0; i < leftArrows.length; i++) {
             leftArrows[i].addEventListener("click", moveLeft);
@@ -144,6 +146,30 @@ var Transformations;
         rotated = totation + rot;
         let transform = getTransformation();
         img.style.transform = transform;
+    }
+    function clear() {
+        posX = 0;
+        posY = 0;
+        skewedX = 0;
+        skewedY = 0;
+        rotated = 0;
+        let transform = getTransformation();
+        img.style.transform = transform;
+        positions = { 0: "translate", 1: "skew", 2: "rotation" };
+        order = { "translate": 0, "skew": 1, "rotation": 2 };
+        document.getElementById("translate").style.order = "0";
+        document.getElementById("skew").style.order = "1";
+        document.getElementById("rotation").style.order = "2";
+        let inputX = document.getElementById("translateX");
+        inputX.value = "0";
+        let inputY = document.getElementById("translateY");
+        inputY.value = "0";
+        let skewInpX = document.getElementById("skewX");
+        skewInpX.value = "0";
+        let skewInpY = document.getElementById("skewY");
+        skewInpY.value = "0";
+        let rotation = document.getElementById("rotate");
+        rotation.value = "0";
     }
     document.addEventListener("DOMContentLoaded", main);
 })(Transformations || (Transformations = {}));
