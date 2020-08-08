@@ -28,6 +28,18 @@ h3 {
     color: #00A8FF;
 }
 
+div[style="order: 0;"] .left{
+    display: none;
+}
+
+div[style="order: 2;"] .right{
+    display: none;
+}
+
+span{
+    padding-right: 5px;
+}
+
 #container{
     position: absolute;
     left: 50%;
@@ -43,9 +55,28 @@ h3 {
     
 }
 
-button{
-    height: 30px;
+button {
+    height: 40px;
+    margin: 30px 0;
+	background-color:#00A8FF;
+	border-radius:28px;
+	border:1px solid #00A8FF;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:17px;
+	padding:10px;
+	text-decoration:none;
 }
+button:hover {
+	background-color:rgb(20, 163, 235);
+}
+button:active {
+	position:relative;
+    top:1px;
+}
+
+button:focus {outline:0;}
 
 #controls{
     position: absolute;
@@ -120,8 +151,9 @@ input {
         left:CALC(50% - 25px);
         width: 50px;
     }
-    
-    
+    button {
+        margin: 30px 80px;
+    }
     #container{
         width: 90%;
         height: 200px; 

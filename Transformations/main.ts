@@ -66,7 +66,7 @@ namespace Transformations {
     function moveLeft(_event: MouseEvent): void {
 
         let target: HTMLAnchorElement = <HTMLAnchorElement>_event.target;
-        let parent: HTMLDivElement = <HTMLDivElement>target.parentNode;
+        let parent: HTMLDivElement = <HTMLDivElement>target.parentNode.parentNode;
         let category: string = parent.getAttribute("id");
 
         let position: number = order[category];
@@ -92,7 +92,7 @@ namespace Transformations {
 
     function moveRight(_event: MouseEvent): void {
         let target: HTMLAnchorElement = <HTMLAnchorElement>_event.target;
-        let parent: HTMLDivElement = <HTMLDivElement>target.parentNode;
+        let parent: HTMLDivElement = <HTMLDivElement>target.parentNode.parentNode;
         let category: string = parent.getAttribute("id");
 
         let position: number = order[category];

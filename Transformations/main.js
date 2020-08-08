@@ -40,7 +40,7 @@ var Transformations;
     //change order of transformation and the order the HTML elements are displayed
     function moveLeft(_event) {
         let target = _event.target;
-        let parent = target.parentNode;
+        let parent = target.parentNode.parentNode;
         let category = parent.getAttribute("id");
         let position = order[category];
         let newPosition = order[category] - 1;
@@ -59,7 +59,7 @@ var Transformations;
     }
     function moveRight(_event) {
         let target = _event.target;
-        let parent = target.parentNode;
+        let parent = target.parentNode.parentNode;
         let category = parent.getAttribute("id");
         let position = order[category];
         let newPosition = order[category] + 1;
