@@ -10,18 +10,19 @@ namespace Partikel {
         public currentSize: number;
         public rot: number = 0;
         
+        public moveY: number = Math.floor(Math.random() * (-6) + 3) / 10;
+        public moveX: number = 1;
+
         private startSize: number = 20;
         private dieSize: number = 30;
         private startLifeAt: number;
-        private moveY: number = Math.floor(Math.random() * (-6) + 3) / 10;
-        private moveX: number = 1 - (Math.random() * 0.5);
-        private maxLifeTime: number;
+        public maxLifeTime: number;
 
         constructor(x: number, y: number, canvas: HTMLCanvasElement) {
             
             this.x = x;
             this.y = y;
-            this.maxLifeTime = Math.min(5000, (canvas.height / (1.5 * 60) * 1000));
+            this.maxLifeTime = 4000;
             this.rot = Math.random() * 360;
             this.startLifeAt = new Date().getTime();
         }
@@ -34,6 +35,7 @@ namespace Partikel {
             this.currentSize = this.startSize + ((this.dieSize - this.startSize) * lifePerc * .1);
             this.alpha = 1 - (lifePerc * .01);
             this.alpha = Math.max(this.alpha, 0);
+           
             this.x += this.moveX;
             this.y += this.moveY;
         }

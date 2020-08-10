@@ -30,7 +30,7 @@ namespace Transformations {
 
     function main(): void {
 
-        img = document.querySelector("img");
+        img = document.querySelectorAll("img")[1];
 
         let inputX: HTMLInputElement = <HTMLInputElement>document.getElementById("translateX");
         inputX.addEventListener("input", translateX);
@@ -46,6 +46,9 @@ namespace Transformations {
 
         let rotation: HTMLInputElement = <HTMLInputElement>document.getElementById("rotate");
         rotation.addEventListener("input", rotate);
+
+        let reset: HTMLButtonElement = <HTMLButtonElement>document.getElementById("reset");
+        reset.addEventListener("click", clear);
 
         let leftArrows: HTMLCollectionOf<HTMLAnchorElement> = <HTMLCollectionOf<HTMLAnchorElement>>document.getElementsByClassName("left");
         for (let i: number = 0; i < leftArrows.length; i++) {
@@ -63,7 +66,7 @@ namespace Transformations {
     function moveLeft(_event: MouseEvent): void {
 
         let target: HTMLAnchorElement = <HTMLAnchorElement>_event.target;
-        let parent: HTMLDivElement = <HTMLDivElement>target.parentNode;
+        let parent: HTMLDivElement = <HTMLDivElement>target.parentNode.parentNode;
         let category: string = parent.getAttribute("id");
 
         let position: number = order[category];
@@ -89,7 +92,7 @@ namespace Transformations {
 
     function moveRight(_event: MouseEvent): void {
         let target: HTMLAnchorElement = <HTMLAnchorElement>_event.target;
-        let parent: HTMLDivElement = <HTMLDivElement>target.parentNode;
+        let parent: HTMLDivElement = <HTMLDivElement>target.parentNode.parentNode;
         let category: string = parent.getAttribute("id");
 
         let position: number = order[category];
@@ -205,6 +208,40 @@ namespace Transformations {
         rotated = totation + rot;
         let transform: string = getTransformation();
         img.style.transform = transform;
+    }
+
+    function clear(): void {
+
+        posX = 0;
+        posY = 0;
+        skewedX = 0;
+        skewedY = 0;
+        rotated = 0;
+
+        let transform: string = getTransformation();
+        img.style.transform = transform;
+
+        positions = { 0: "translate", 1: "skew", 2: "rotation" };
+        order = { "translate": 0, "skew": 1, "rotation": 2 };
+
+        (<HTMLDivElement>document.getElementById("translate")).style.order="0";
+        (<HTMLDivElement>document.getElementById("skew")).style.order="1";
+        (<HTMLDivElement>document.getElementById("rotation")).style.order="2";
+
+        let inputX: HTMLInputElement = <HTMLInputElement>document.getElementById("translateX");
+        inputX.value="0";
+
+        let inputY: HTMLInputElement = <HTMLInputElement>document.getElementById("translateY");
+        inputY.value="0";
+
+        let skewInpX: HTMLInputElement = <HTMLInputElement>document.getElementById("skewX");
+        skewInpX.value="0";
+
+        let skewInpY: HTMLInputElement = <HTMLInputElement>document.getElementById("skewY");
+        skewInpY.value="0";
+
+        let rotation: HTMLInputElement = <HTMLInputElement>document.getElementById("rotate");
+        rotation.value="0";
     }
 
     document.addEventListener("DOMContentLoaded", main);

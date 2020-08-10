@@ -9,13 +9,18 @@ namespace Partikel {
 
     let prevSpawnTime: number = new Date().getTime();
     let minSpawnTime: number = 40;
-    let lifeTime: number = 1000;
+    let lifeTime: number = 4000;
 
     let smokeImage: HTMLImageElement = new Image();
     smokeImage.src = "smoke.png";
 
+    let changeLife: HTMLInputElement = <HTMLInputElement>document.getElementById("life");
+
+    let changeMove: HTMLInputElement = <HTMLInputElement>document.getElementById("move");
+
     smokeImage.onload = function () {
         render();
+
     }
 
     function spawn(): void {
@@ -27,6 +32,19 @@ namespace Partikel {
     }
 
     function render(): void {
+
+        lifeTime = Number(changeLife.value);
+
+        var len = particles.length;
+        while (len--) {
+            particles[len].maxLifeTime = Number(changeLife.value)
+        }
+        len = particles.length;
+        while (len--) {
+         
+            particles[len].moveX = Number(changeMove.value);
+        }
+
         var len = particles.length;
         crc2.clearRect(0, 0, canvas.width, canvas.height);
 
