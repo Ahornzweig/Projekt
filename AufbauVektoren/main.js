@@ -7,10 +7,21 @@ var aufbauVektoren;
     let r = 0;
     let g = 0;
     let b = 0;
+    let prvR = 0;
+    let prvG = 0;
+    let prvB = 0;
     let squareSelected = true;
     let prevFillingStyle;
     let prevLineWidth = 5;
+    let inputRed;
+    let inputGreen;
+    let inputBlue;
+    let inputLine;
     function main() {
+        inputRed = document.getElementById("red");
+        inputGreen = document.getElementById("green");
+        inputBlue = document.getElementById("blue");
+        inputLine = document.getElementById("line");
         canvas = document.getElementsByTagName("canvas")[0];
         ctx = canvas.getContext("2d");
         ctx.lineWidth = lineWidth;
@@ -52,16 +63,29 @@ var aufbauVektoren;
                 break;
             case "triangle":
                 squareSelected = false;
-                prevFillingStyle = "rgb(" + r + "," + g + "," + b + ")";
-                prevLineWidth = lineWidth;
+                setValues();
                 break;
             case "square":
                 squareSelected = true;
-                prevFillingStyle = "rgb(" + r + "," + g + "," + b + ")";
-                prevLineWidth = lineWidth;
+                setValues();
                 break;
         }
         draw();
+    }
+    function setValues() {
+        inputRed.value = prvR + "";
+        inputGreen.value = prvG + "";
+        inputBlue.value = prvB + "";
+        inputLine.value = prevLineWidth + "";
+        prevFillingStyle = "rgb(" + r + "," + g + "," + b + ")";
+        prvR = r;
+        prvG = g;
+        prvB = b;
+        prevLineWidth = lineWidth;
+        r = Number(inputRed.value);
+        g = Number(inputGreen.value);
+        b = Number(inputBlue.value);
+        lineWidth = Number(inputLine.value);
     }
     function draw() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -92,6 +116,7 @@ var aufbauVektoren;
         else {
             ctx.fillStyle = "rgb(" + r + "," + g + "," + b + ")";
             ctx.lineWidth = lineWidth;
+            console.log("else");
         }
         ctx.beginPath();
         ctx.moveTo(100, 150);

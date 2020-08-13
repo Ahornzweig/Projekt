@@ -6,11 +6,26 @@ namespace aufbauVektoren {
     let r: number = 0;
     let g: number = 0;
     let b: number = 0;
+
+
+    let prvR: number = 0;
+    let prvG: number = 0;
+    let prvB: number = 0;
+
     let squareSelected: boolean = true;
     let prevFillingStyle: string;
     let prevLineWidth: number = 5;
 
+    let inputRed: HTMLInputElement;
+    let inputGreen: HTMLInputElement;
+    let inputBlue: HTMLInputElement;
+    let inputLine: HTMLInputElement;
+
     function main(): void {
+        inputRed = <HTMLInputElement>document.getElementById("red");
+        inputGreen = <HTMLInputElement>document.getElementById("green");
+        inputBlue = <HTMLInputElement>document.getElementById("blue");
+        inputLine = <HTMLInputElement>document.getElementById("line");
         canvas = document.getElementsByTagName("canvas")[0];
         ctx = canvas.getContext("2d");
 
@@ -60,17 +75,33 @@ namespace aufbauVektoren {
                 break;
             case "triangle":
                 squareSelected = false;
-                prevFillingStyle = "rgb(" + r + "," + g + "," + b + ")";
-                prevLineWidth = lineWidth;
+                setValues();
                 break;
             case "square":
                 squareSelected = true;
-                prevFillingStyle = "rgb(" + r + "," + g + "," + b + ")";
-                prevLineWidth = lineWidth;
+                setValues();
                 break;
         }
 
         draw();
+    }
+
+    function setValues(): void {
+        inputRed.value = prvR + "";
+        inputGreen.value = prvG + "";
+        inputBlue.value = prvB + "";
+        inputLine.value = prevLineWidth + "";
+        
+        prevFillingStyle = "rgb(" + r + "," + g + "," + b + ")";
+        prvR = r;
+        prvG = g;
+        prvB = b;
+        prevLineWidth = lineWidth;
+
+        r = Number(inputRed.value);
+        g = Number(inputGreen.value);
+        b = Number(inputBlue.value);
+        lineWidth = Number(inputLine.value);
     }
 
 
@@ -104,6 +135,7 @@ namespace aufbauVektoren {
         } else {
             ctx.fillStyle = "rgb(" + r + "," + g + "," + b + ")";
             ctx.lineWidth = lineWidth;
+            console.log("else");
         }
 
         ctx.beginPath();
