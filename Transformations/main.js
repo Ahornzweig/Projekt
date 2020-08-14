@@ -113,7 +113,7 @@ var Transformations;
                 result += "rotate(" + rotated + "deg)";
                 break;
         }
-        result += "rotate(" + rotated + "deg)";
+        //result += "rotate(" + rotated + "deg)";
         return result;
     }
     //update transform values

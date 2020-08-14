@@ -163,7 +163,7 @@ namespace Transformations {
                 break;
         }
 
-        result += "rotate(" + rotated + "deg)";
+        //result += "rotate(" + rotated + "deg)";
 
         return result;
     }
