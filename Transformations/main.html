@@ -20,13 +20,16 @@
         </div>
 
         <div id="controls">
-            
-            <div id="translate" style="order: 0;">
-                <h3><span>Translate</span> <div class="left">
-                        &#8249;
-                    </div>
-                    <div class="right">
-                        &#8250;
+
+            <div id="translate" class="control" style="order: 0;">
+                <h3><span>Translate</span>
+                    <div class="arows">
+                        <div class="left">
+                            &#8249;
+                        </div>
+                        <div class="right">
+                            &#8250;
+                        </div>
                     </div>
                 </h3>
 
@@ -39,31 +42,39 @@
                 </label>
             </div>
 
-            <div id="skew" style="order: 1;">
-                <h3><span>Skew</span>  <div class="left">
-                    &#8249;
-                </div>
-                <div class="right">
-                    &#8250;
-                </div></h3>
-               
-                <label for="skewX">X
-                    <input id="skewX" type="range" min="-40" max="40" value="0">
+            <div id="scale" class="control" style="order: 1;">
+                <h3><span>Scale</span>
+                    <div class="arows">
+                        <div class="left">
+                            &#8249;
+                        </div>
+                        <div class="right">
+                            &#8250;
+                        </div>
+                    </div>
+                </h3>
+
+                <label for="scaleX">X
+                    <input id="scaleX" type="range" min="0.5" max="1.5" value="1" step="0.1">
                 </label>
                 <br>
-                <label for="skewY">Y
-                    <input id="skewY" type="range" min="-40" max="40" value="0">
+                <label for="scaleY">Y
+                    <input id="scaleY" type="range" min="0.5" max="1.5" value="1" step="0.1">
                 </label>
             </div>
 
-            <div id="rotation" style="order: 2;">
-                <h3><span>Rotate</span><div class="left">
-                    &#8249;
-                </div>
-                <div class="right">
-                    &#8250;
-                </div></h3>
-              
+            <div id="rotation" class="control" style="order: 2;">
+                <h3><span>Rotate</span>
+                    <div class="arows">
+                        <div class="left">
+                            &#8249;
+                        </div>
+                        <div class="right">
+                            &#8250;
+                        </div>
+                    </div>
+                </h3>
+
                 <label for="rotate">
                     <input id="rotate" type="range" min="0" max="360" value="0">
                 </label>
