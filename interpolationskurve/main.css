@@ -2,10 +2,6 @@ body{
   font-family: Arial, Helvetica, sans-serif;
 }
 
-figure{
-margin: 0;
-}
-
  #container {
   max-width: 1200px;
   position: absolute;
@@ -28,7 +24,6 @@ label{
 }
  
 .graph {
-  font-size: 13px;
   margin-left: -20px;
   align-self: center;
 }
@@ -43,14 +38,13 @@ figure {
   position: relative;
   padding-left: 20px;
   width: 200px;
+  margin: 0;
  }
 
 figcaption {
   display: block;
   position: absolute;
 }
-
-
 #tween {
 	background-color:#00A8FF;
 	border-radius:28px;
