@@ -8,6 +8,10 @@
     <script src='main.js'></script>
 </head>
 <style>
+    body {
+        font-size: 20px;
+    }
+
     img {
         width: 100%;
     }
@@ -28,8 +32,18 @@
         margin: 30px auto 20px;
     }
 
-    #result img:last-child{
+    #result img:last-child {
         display: none;
+    }
+
+    @media screen and (max-width: 800px) {
+        #result {
+            width: 70%;
+        }
+
+        body {
+        font-size: 15px;
+    }
     }
 </style>
 
@@ -41,12 +55,13 @@
 
     <div id="options">
         <div><label>
-            <img src="assets/3.png">
-            <input value="2" type="radio" name="radio-group" checked>Perspektivische Projektions-Transformation</label>
+                <img src="assets/3.png">
+                <input value="2" type="radio" name="radio-group" checked>Perspektivische
+                Projektions-Transformation</label>
         </div>
         <div><label>
-            <img src="assets/1.png">
-            <input value="4" type="radio" name="radio-group">Orthografische Projektions-Transformation</label>
+                <img src="assets/1.png">
+                <input value="4" type="radio" name="radio-group">Orthografische Projektions-Transformation</label>
         </div>
     </div>
 </body>
