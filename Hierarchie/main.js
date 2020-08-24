@@ -41,7 +41,7 @@ var BoneAnimation;
         playVideo = _event.target.value;
         let showNew = document.getElementById(playVideo);
         showNew.style.cssText = "display:block;";
-        show.style.cssText = "display:hide;";
+        show.style.cssText = "display:none;";
         show = showNew;
     }
     window.addEventListener("load", init);

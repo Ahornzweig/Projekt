@@ -53,7 +53,7 @@ namespace BoneAnimation {
 
         let showNew: HTMLImageElement = <HTMLImageElement>document.getElementById(playVideo);
         showNew.style.cssText = "display:block;"
-        show.style.cssText = "display:hide;"
+        show.style.cssText = "display:none;"
         show = showNew;
     }
 
