@@ -24,8 +24,10 @@ namespace kurvenSplines {
 
         draw():void {
             this.getSides();
+            crc2.save();
             crc2.fillStyle = "#222";
             crc2.fillRect(this.left, this.top, this.width, this.height)
+            crc2.restore();
         }
     }
 }

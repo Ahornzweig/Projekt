@@ -3,6 +3,7 @@ namespace kurvenSplines {
     export let crc2: CanvasRenderingContext2D;
     let handleInUse: Handle;
     let canvas: HTMLCanvasElement
+    
 
     function main(): void {
 

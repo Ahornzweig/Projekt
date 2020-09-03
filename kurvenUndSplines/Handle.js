@@ -16,8 +16,10 @@ var kurvenSplines;
         }
         draw() {
             this.getSides();
+            kurvenSplines.crc2.save();
             kurvenSplines.crc2.fillStyle = "#222";
             kurvenSplines.crc2.fillRect(this.left, this.top, this.width, this.height);
+            kurvenSplines.crc2.restore();
         }
     }
     kurvenSplines.Handle = Handle;
