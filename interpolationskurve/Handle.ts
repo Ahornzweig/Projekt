@@ -13,6 +13,10 @@ namespace interpolationskurven {
         constructor(_x: number, _y: number) {
             this.x = _x;
             this.y = _y;
+            if(window.innerWidth<900){
+                this.height=24;
+                this.width=24;
+            }
         }
 
         getSides():void {

@@ -7,6 +7,10 @@ var interpolationskurven;
             this.height = 12;
             this.x = _x;
             this.y = _y;
+            if (window.innerWidth < 900) {
+                this.height = 24;
+                this.width = 24;
+            }
         }
         getSides() {
             this.left = this.x - (this.width / 2);
