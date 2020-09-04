@@ -14,8 +14,8 @@ namespace interpolationskurven {
         let timeVal: number = 700;
 
 
-        var supportsBezierRange = (function () {
-            var el = document.createElement('div');
+        let supportsBezierRange = (function () {
+            let el = document.createElement('div');
             el.style.webkitTransitionTimingFunction = 'cubic-bezier(1,0,0,1.1)';
             return !!el.style.webkitTransitionTimingFunction.length;
         })();
@@ -61,17 +61,17 @@ namespace interpolationskurven {
             event.preventDefault();
             event.stopPropagation(); //not sure if this is needed
 
-            var cursorEvent = <MouseEvent>event;
+            let cursorEvent = <MouseEvent>event;
             if(touch){
                 cursorEvent = (<TouchEvent>event).touches[0];
             }
-            var mouseCoordinates = getPos(cursorEvent),
+            let mouseCoordinates = getPos(cursorEvent),
                 x = mouseCoordinates.x,
                 y = mouseCoordinates.y;
 
             //check to see if over any handles
-            for (var i = 0; i < handles.length; i++) {
-                var current = handles[i],
+            for (let i = 0; i < handles.length; i++) {
+                let current = handles[i],
                     curLeft = current.left,
                     curRight = current.right,
                     curTop = current.top,
@@ -107,13 +107,13 @@ namespace interpolationskurven {
 
         function onMove(event: Event) {
 
-            var cursorEvent = <MouseEvent>event;
+            let cursorEvent = <MouseEvent>event;
             if(touch){
                 cursorEvent = (<TouchEvent>event).changedTouches[0];
             }
             
 
-            var x = cursorEvent.pageX - getOffSet(canvas).left,
+            let x = cursorEvent.pageX - getOffSet(canvas).left,
                 y = cursorEvent.pageY - getOffSet(canvas).top;
 
             if (x > graph.width) {
@@ -163,7 +163,7 @@ namespace interpolationskurven {
             // draw graph
             graph.draw();
             // get handles
-            var cp1 = handles[0],
+            let cp1 = handles[0],
                 cp2 = handles[1];
             // draw bezier curve
             crc2.save();
@@ -187,7 +187,7 @@ namespace interpolationskurven {
             crc2.lineTo(cp2.x, cp2.y);
             crc2.stroke();
          
-            for (var i = 0; i < handles.length; i++) {
+            for (let i = 0; i < handles.length; i++) {
                 handles[i].draw();
             }
 
@@ -239,7 +239,7 @@ namespace interpolationskurven {
             updateDrawing();
         }
 
-        var options = document.getElementById("options");
+        let options = document.getElementById("options");
         options.addEventListener("input", presetChange);
 
         let set = true;

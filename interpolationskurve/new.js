@@ -11,8 +11,8 @@ var interpolationskurven;
         interpolationskurven.crc2 = canvas.getContext('2d');
         let box = document.getElementById('box');
         let timeVal = 700;
-        var supportsBezierRange = (function () {
-            var el = document.createElement('div');
+        let supportsBezierRange = (function () {
+            let el = document.createElement('div');
             el.style.webkitTransitionTimingFunction = 'cubic-bezier(1,0,0,1.1)';
             return !!el.style.webkitTransitionTimingFunction.length;
         })();
@@ -46,14 +46,14 @@ var interpolationskurven;
         function onPress(event) {
             event.preventDefault();
             event.stopPropagation(); //not sure if this is needed
-            var cursorEvent = event;
+            let cursorEvent = event;
             if (touch) {
                 cursorEvent = event.touches[0];
             }
-            var mouseCoordinates = getPos(cursorEvent), x = mouseCoordinates.x, y = mouseCoordinates.y;
+            let mouseCoordinates = getPos(cursorEvent), x = mouseCoordinates.x, y = mouseCoordinates.y;
             //check to see if over any handles
-            for (var i = 0; i < handles.length; i++) {
-                var current = handles[i], curLeft = current.left, curRight = current.right, curTop = current.top, curBottom = current.bottom;
+            for (let i = 0; i < handles.length; i++) {
+                let current = handles[i], curLeft = current.left, curRight = current.right, curTop = current.top, curBottom = current.bottom;
                 if (x >= curLeft &&
                     x <= curRight &&
                     y >= curTop &&
@@ -71,11 +71,11 @@ var interpolationskurven;
             }
         }
         function onMove(event) {
-            var cursorEvent = event;
+            let cursorEvent = event;
             if (touch) {
                 cursorEvent = event.changedTouches[0];
             }
-            var x = cursorEvent.pageX - getOffSet(canvas).left, y = cursorEvent.pageY - getOffSet(canvas).top;
+            let x = cursorEvent.pageX - getOffSet(canvas).left, y = cursorEvent.pageY - getOffSet(canvas).top;
             if (x > graph.width) {
                 x = graph.width;
             }
@@ -111,7 +111,7 @@ var interpolationskurven;
             // draw graph
             graph.draw();
             // get handles
-            var cp1 = handles[0], cp2 = handles[1];
+            let cp1 = handles[0], cp2 = handles[1];
             // draw bezier curve
             interpolationskurven.crc2.save();
             interpolationskurven.crc2.strokeStyle = '#4C84D3';
@@ -132,7 +132,7 @@ var interpolationskurven;
             interpolationskurven.crc2.moveTo(graph.width, graph.y);
             interpolationskurven.crc2.lineTo(cp2.x, cp2.y);
             interpolationskurven.crc2.stroke();
-            for (var i = 0; i < handles.length; i++) {
+            for (let i = 0; i < handles.length; i++) {
                 handles[i].draw();
             }
         }
@@ -164,7 +164,7 @@ var interpolationskurven;
             cp2.y = graph.y + graph.height - (Number(coordinates[3]) * graph.height);
             updateDrawing();
         }
-        var options = document.getElementById("options");
+        let options = document.getElementById("options");
         options.addEventListener("input", presetChange);
         let set = true;
         let startButton = document.querySelector(".testButton");
